@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from "mongoose";
 
+// Delete this later when the data from MongoDB
 import marathons from "./data/marathons.json"
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProjectApi";
@@ -34,19 +35,19 @@ app.use((req, res, next) => {
   }
 })
 
-
-
 // Start defining your routes here
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
 
+// Gets the races from internal json file
 app.get('/marathons', (req, res) => {
   res.status(200).json({
     marathons: marathons,
   })
 })
 
+// Gets the races from MongoDB 
 app.get('/allmarathons', async (req, res) => {
   try {
     const allmarathons = await Marathon.find()
