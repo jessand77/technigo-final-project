@@ -1,0 +1,104 @@
+[
+	{
+		"name": "Stockholm Marathon",
+		"city": "Stockholm",
+		"country": "Sweden",
+		"website": "https://www.stockholmmarathon.se/"
+	},
+	{
+		"name": "6 lakes",
+		"city": "Uppsala",
+		"country": "Sweden",
+		"website": "https://www.6sjoar.se/"
+	},
+	{
+		"name": "Edinburgh Marathon",
+		"city": "Edinburgh",
+		"country": "United Kingdom",
+		"website": "https://www.edinburghmarathon.com/"
+	},
+	{
+		"name": "Brighton Marathon",
+		"city": "Brighton",
+		"country": "United Kingdom",
+		"website": "https://brightonmarathonweekend.co.uk/"
+	},
+	{
+		"name": "Berlin Marathon",
+		"city": "Berlin",
+		"country": "Germany",
+		"website": "https://www.bmw-berlin-marathon.com/en/"
+	},
+	{
+		"name": "Marathon des Châteaux du Médoc",
+		"city": "Bordeaux",
+		"country": "France",
+		"website": "https://www.marathondumedoc.com/en/"
+	},
+	{
+		"name": "Paris Marathon",
+		"city": "Paris",
+		"country": "France",
+		"website": "https://www.schneiderelectricparismarathon.com/en/"
+	},
+	{
+		"name": "Valencia Marathon",
+		"city": "Valencia",
+		"country": "Spain",
+		"website": "https://www.valenciaciudaddelrunning.com/en/"
+	},
+	{
+		"name": "Skagen Marathon",
+		"city": "Skagen",
+		"country": "Denmark",
+		"website": "https://www.skagenmarathon.dk/en/"
+	},
+	{
+		"name": "Rotterdam Marathon",
+		"city": "Rotterdam",
+		"country": "Netherlands",
+		"website": "https://www.nnmarathonrotterdam.org/"
+	},
+	{
+		"name": "Athens Marathon",
+		"city": "Athens",
+		"country": "Greece",
+		"website": "https://www.athensauthenticmarathon.gr/"
+	},
+	{
+		"name": "Lake Garda Marathon",
+		"city": "Malcesine",
+		"country": "Italy",
+		"website": "https://www.lakegarda42.com/en"
+	},
+	{
+		"name": "Hamburg Marathon",
+		"city": "Hamburg",
+		"country": "Germany",
+		"website": "https://haspa-marathon-hamburg.de/en/"
+	},
+	{
+		"name": "Rhodes Marathon",
+		"city": "Rhodes",
+		"country": "Greece",
+		"website": "https://rhodesmarathon.gr/en/"
+	},
+	{
+		"name": "Helsinki Marathon",
+		"city": "Helsinki",
+		"country": "Finland",
+		"website": "https://www.helsinkimarathon.fi/en/home/"
+	},
+	{
+		"name": "Barcelona Marathon",
+		"city": "Barcelona",
+		"country": "Spain",
+		"website": "https://www.zurichmaratobarcelona.es/en/"
+	},
+	{
+		"name": "Tallinn Marathon",
+		"city": "Tallinn",
+		"country": "Estonia",
+		"website": "https://www.jooks.ee/en/tallinn-marathon/"
+	}
+]

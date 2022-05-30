@@ -1,9 +1,9 @@
-import express from "express";
-import cors from "cors";
+import express from 'express'
+import cors from 'cors'
+import mongoose from "mongoose";
 
-// Defines the port the app will run on. Defaults to 8080, but can be overridden
-// when starting the server. Example command to overwrite PORT env variable value:
-// PORT=9000 npm start
+import marathons from "./data/marathons.json"
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -15,6 +15,12 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
 });
+
+app.get('/marathons', (req, res) => {
+  res.status(200).json({
+    marathons: marathons,
+  })
+})
 
 // Start the server
 app.listen(port, () => {
