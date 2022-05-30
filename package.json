@@ -1,0 +1,23 @@
+{
+	"name": "technigo-final-project",
+	"version": "1.0.0",
+	"description": "My final project at Technigo's bootcamp",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"postinstall": "npm install --prefix backend"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jessand77/technigo-final-project.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jessand77/technigo-final-project/issues"
+	},
+	"homepage": "https://github.com/jessand77/technigo-final-project#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.1"
+	}
+}
