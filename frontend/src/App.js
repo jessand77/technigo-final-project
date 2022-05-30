@@ -1,10 +1,11 @@
 import React from 'react'
+import MarathonList from 'components/MarathonList'
 
 export const App = () => {
   return (
     <div>
-      <h1>My final project!</h1>
-      <h2>Fantastiskt!</h2>
+      <h1>Marathons</h1>
+      <MarathonList />
     </div>
   )
 }

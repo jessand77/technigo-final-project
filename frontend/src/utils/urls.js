@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://technigo-final-project.herokuapp.com/'
