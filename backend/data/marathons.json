@@ -2,102 +2,136 @@
 	{
 		"name": "Stockholm Marathon",
 		"city": "Stockholm",
+		"lat": 59.33622,
+		"lon": 18.06857,
 		"country": "Sweden",
 		"website": "https://www.stockholmmarathon.se/"
 	},
 	{
 		"name": "6 lakes",
 		"city": "Uppsala",
+		"lat": 59.86292,
+		"lon": 17.63716,
 		"country": "Sweden",
 		"website": "https://www.6sjoar.se/"
 	},
 	{
 		"name": "Edinburgh Marathon",
 		"city": "Edinburgh",
+		"lat": 55.95292,
+		"lon": -3.20122,
 		"country": "United Kingdom",
 		"website": "https://www.edinburghmarathon.com/"
 	},
 	{
 		"name": "Brighton Marathon",
 		"city": "Brighton",
+		"lat": 50.82202,
+		"lon": -0.13554,
 		"country": "United Kingdom",
 		"website": "https://brightonmarathonweekend.co.uk/"
 	},
 	{
 		"name": "Berlin Marathon",
 		"city": "Berlin",
+		"lat": 52.52515,
+		"lon": 13.37666,
 		"country": "Germany",
 		"website": "https://www.bmw-berlin-marathon.com/en/"
 	},
 	{
 		"name": "Marathon des Châteaux du Médoc",
 		"city": "Bordeaux",
+		"lat": 44.84435,
+		"lon": -0.5701,
 		"country": "France",
 		"website": "https://www.marathondumedoc.com/en/"
 	},
 	{
 		"name": "Paris Marathon",
 		"city": "Paris",
+		"lat": 48.86584,
+		"lon": 2.33673,
 		"country": "France",
 		"website": "https://www.schneiderelectricparismarathon.com/en/"
 	},
 	{
 		"name": "Valencia Marathon",
 		"city": "Valencia",
+		"lat": 39.47564,
+		"lon": -0.37868,
 		"country": "Spain",
 		"website": "https://www.valenciaciudaddelrunning.com/en/"
 	},
 	{
 		"name": "Skagen Marathon",
 		"city": "Skagen",
+		"lat": 57.7218,
+		"lon": 10.58907,
 		"country": "Denmark",
 		"website": "https://www.skagenmarathon.dk/en/"
 	},
 	{
 		"name": "Rotterdam Marathon",
 		"city": "Rotterdam",
+		"lat": 51.92037,
+		"lon": 4.47972,
 		"country": "Netherlands",
 		"website": "https://www.nnmarathonrotterdam.org/"
 	},
 	{
 		"name": "Athens Marathon",
 		"city": "Athens",
+		"lat": 37.97571,
+		"lon": 23.73458,
 		"country": "Greece",
 		"website": "https://www.athensauthenticmarathon.gr/"
 	},
 	{
 		"name": "Lake Garda Marathon",
 		"city": "Malcesine",
+		"lat": 45.76437,
+		"lon": 10.80824,
 		"country": "Italy",
 		"website": "https://www.lakegarda42.com/en"
 	},
 	{
 		"name": "Hamburg Marathon",
 		"city": "Hamburg",
+		"lat": 53.55273,
+		"lon": 10.00533,
 		"country": "Germany",
 		"website": "https://haspa-marathon-hamburg.de/en/"
 	},
 	{
 		"name": "Rhodes Marathon",
 		"city": "Rhodes",
+		"lat": 36.45727,
+		"lon": 28.22229,
 		"country": "Greece",
 		"website": "https://rhodesmarathon.gr/en/"
 	},
 	{
 		"name": "Helsinki Marathon",
 		"city": "Helsinki",
+		"lat": 60.18165,
+		"lon": 24.93764,
 		"country": "Finland",
 		"website": "https://www.helsinkimarathon.fi/en/home/"
 	},
 	{
 		"name": "Barcelona Marathon",
 		"city": "Barcelona",
+		"lat": 41.39438,
+		"lon": 2.17622,
 		"country": "Spain",
 		"website": "https://www.zurichmaratobarcelona.es/en/"
 	},
 	{
 		"name": "Tallinn Marathon",
 		"city": "Tallinn",
+		"lat": 59.43687,
+		"lon": 24.75564,
 		"country": "Estonia",
 		"website": "https://www.jooks.ee/en/tallinn-marathon/"
 	}

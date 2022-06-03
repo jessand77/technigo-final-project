@@ -7,23 +7,14 @@ import listEndpoints from 'express-list-endpoints';
 
 // Delete this later when the data from MongoDB works?
 import marathons from './data/marathons.json';
+import { Marathon } from './models/marathon';
+import { User } from './models/user';
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProjectApi';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
-
-const { Schema } = mongoose;
-
-const marathonSchema = new Schema({
-  name: String,
-  city: String,
-  country: String,
-  website: String,
-});
-
-const Marathon = mongoose.model('Marathon', marathonSchema);
-
-dotenv.config();
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -67,6 +58,19 @@ app.get('/allmarathons', async (req, res) => {
     });
   }
 });
+
+app.get('/users', async (req, res) => {
+  try {
+    const allUsers = await User.find().exec();
+    res.status(200).json(allUsers);
+  } catch (err) {
+    res.status(400).json({
+      error: err.errors,
+    });
+  }
+});
+
+
 
 // Start the server
 app.listen(port, () => {
