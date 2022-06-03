@@ -2,15 +2,17 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+// import crypto from 'crypto';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
+
+dotenv.config();
 
 // Delete this later when the data from MongoDB works?
 import marathons from './data/marathons.json';
 import { Marathon } from './models/marathon';
-import { User } from './models/user';
-
-dotenv.config();
+import User from './models/user';
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProjectApi';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -70,6 +72,32 @@ app.get('/users', async (req, res) => {
   }
 });
 
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const salt = bcrypt.genSaltSync();
+
+    const newUser = await new User({
+      username: username,
+      password: bcrypt.hashSync(password, salt)
+    }).save();
+
+    res.status(201).json({
+      success: true,
+      response: {
+        userId: newUser._id,
+        username: newUser.username,
+        accessToken: newUser.accessToken,
+      },
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({ success: false, message: 'The username already exists' });
+    } else {
+      res.status(400).json({ success: false, message: 'Something went wrong, please try again', error })
+    }
+  }
+});
 
 
 // Start the server

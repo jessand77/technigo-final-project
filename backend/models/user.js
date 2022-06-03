@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator';
+import crypto from 'crypto';
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -9,16 +9,9 @@ const userSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 20,
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     password: {
         type: String,
         required: true,
-        minlength: 6,
-        maxlength: 15,
     },
     accessToken: {
         type: String,
@@ -26,16 +19,11 @@ const userSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: () => new Date()
+        default: () => new Date(),
     },
-    marathonHistory: [{
-        default: []
-    }],
-    marathonBucketlist: [{
-        default: []
-    }]
+    marathons: []
 });
 
-userSchema.plugin(uniqueValidator);
+const User = mongoose.model('User', userSchema);
 
-export const User = mongoose.model('User', userSchema);
+export default User;

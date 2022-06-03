@@ -9,4 +9,6 @@ const marathonSchema = new mongoose.Schema({
     website: String,
 });
 
-export const Marathon = mongoose.model('Marathon', marathonSchema);
+const Marathon = mongoose.model('Marathon', marathonSchema);
+
+export default Marathon;
