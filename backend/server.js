@@ -3,18 +3,16 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-// import crypto from 'crypto';
+import crypto from 'crypto';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
 // Delete this later when the data from MongoDB works?
 import marathons from './data/marathons.json';
-import Marathon from './models/marathon';
-import User from './models/user';
 
 // Delete these imports, cant make it work properly
-import marathonRoutes from './routes/marathon-routes';
-import userRoutes from './routes/user-routes';
+// import marathonRoutes from './routes/marathon-routes';
+// import userRoutes from './routes/user-routes';
 
 dotenv.config();
 
@@ -25,9 +23,52 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Add middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+// ------------ SCHEMAS AND MODELS -------------
+
+const { Schema } = mongoose;
+
+const marathonSchema = new Schema({
+  name: String,
+  city: String,
+  lat: Number,
+  lon: Number,
+  country: String,
+  website: String,
+});
+
+const Marathon = mongoose.model('Marathon', marathonSchema);
+
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 3,
+    maxlength: 20,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  accessToken: {
+    type: String,
+    default: () => crypto.randomBytes(128).toString('hex'),
+  },
+  createdAt: {
+    type: Date,
+    default: () => new Date(),
+  },
+  marathons: [{
+    type: Schema.Types.ObjectId,
+    default: [],
+    ref: 'Marathon',
+  }]
+});
+
+const User = mongoose.model('User', userSchema);
 
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
@@ -37,32 +78,55 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/', marathonRoutes, userRoutes);
+// app.use('/', marathonRoutes, userRoutes);
 
-// Start defining your routes here
 app.get('/', (req, res) => {
   res.send(listEndpoints(app));
 });
 
+//Testar process.env
 app.get('/secret', (req, res) => {
   res.send(process.env.SECRET_KEY);
 });
 
 // Gets the races from internal json file
-app.get('/marathons', (req, res) => {
+app.get('/marathonsfromfile', (req, res) => {
   res.status(200).json({
     marathons: marathons,
   });
 });
 
 // Gets the races from MongoDB
-app.get('/allmarathons', async (req, res) => {
+app.get('/marathons', async (req, res) => {
   try {
     const allmarathons = await Marathon.find().exec();
     res.status(200).json(allmarathons);
   } catch (err) {
     res.status(400).json({
       error: err.errors,
+    });
+  }
+});
+
+app.get('/marathons/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (id) {
+      const marathon = await Marathon.findById(id);
+      res.status(200).json({
+        success: true,
+        response: marathon.name,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        response: 'No marathon with that id was found',
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: 'Invalid request',
     });
   }
 });
@@ -138,19 +202,19 @@ const authenticateUser = async (req, res, next) => {
     } else {
       res.status(401).json({
         success: false,
-        message: 'Please log in'
+        message: 'Please log in',
       });
     }
   } catch (error) {
     res.status(400).json({
       success: false,
       message: 'Invalid request',
-      error
-    })
+      error,
+    });
   }
-}
+};
 
-app.get('/users', authenticateUser)
+app.get('/users', authenticateUser);
 app.get('/users', async (req, res) => {
   try {
     const allUsers = await User.find().exec();
@@ -169,20 +233,103 @@ app.get('/marathons/:id', async (req, res) => {
       const marathon = await Marathon.findById(id);
       res.status(200).json({
         success: true,
-        response: marathon.name
-      })
+        response: marathon.name,
+      });
     } else {
       res.status(404).json({
         success: false,
-        response: 'No marathon with that id was found'
+        response: 'No marathon with that id was found',
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: 'Invalid request',
+    });
+  }
+});
+
+app.get('/users/:userId/marathons', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    if (userId) {
+      const user = await User.findById(userId);
+
+      res.status(200).json({
+        success: true,
+        response: {
+          user: user.username,
+          marathons: user.marathons,
+        }
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        response: 'No user with that id was found',
       })
     }
   } catch (error) {
     res.status(400).json({
       success: false,
-      response: 'Invalid request'
+      response: 'Invalid request',
+    });
+  }
+});
+
+app.patch('/users/:userId/addMarathon', async (req, res) => {
+  const { userId } = req.params;
+  const { marathonToAdd } = req.body;
+  try {
+    if (userId) {
+      await User.findByIdAndUpdate(userId, {
+        $push: {
+          marathons: marathonToAdd
+        }
+      })
+
+      const user = await User.findById(userId);
+      const marathon = await Marathon.findById(marathonToAdd).populate('name');
+
+      res.status(200).json({
+        success: true,
+        response: `${marathon.name} added to user with username ${user.username}`
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: 'Something went wrong'
     })
   }
+
+})
+
+app.patch('/users/:userId/deleteMarathon', async (req, res) => {
+  const { userId } = req.params;
+  const { marathonToDelete } = req.body;
+  try {
+    if (userId) {
+      await User.findByIdAndUpdate(userId, {
+        $pull: {
+          marathons: marathonToDelete
+        }
+      })
+
+      const user = await User.findById(userId);
+      const marathon = await Marathon.findById(marathonToDelete).populate('name');
+
+      res.status(200).json({
+        success: true,
+        response: `${marathon.name} deleted from user with username ${user.username}`
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: 'Something went wrong'
+    })
+  }
+
 })
 
 // Start the server
