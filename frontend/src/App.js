@@ -1,13 +1,19 @@
-import React from 'react'
-import MarathonList from 'components/MarathonList'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MarathonList from 'components/MarathonList';
+import Register from 'components/Register';
+import Login from 'components/Login';
+import NotFound from 'components/NotFound';
 
-const App = () => {
+export const App = () => {
   return (
-    <div>
-      <h1>Marathons</h1>
-      <MarathonList />
-    </div>
-  )
-}
-
-export default App
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MarathonList />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};

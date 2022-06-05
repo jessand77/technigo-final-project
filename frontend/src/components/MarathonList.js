@@ -8,7 +8,7 @@ const MarathonList = () => {
 
     const getMarathons = () => {
         setIsLoading(true)
-        fetch(BASE_URL + 'allmarathons')
+        fetch(BASE_URL + 'marathons')
             .then((res) => res.json())
             .then((data) => {
                 setMarathons(data)
