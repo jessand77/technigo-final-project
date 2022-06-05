@@ -37,6 +37,8 @@ const marathonSchema = new Schema({
   lon: Number,
   country: String,
   website: String,
+  image: String,
+  unsplashLink: String,
 });
 
 const Marathon = mongoose.model('Marathon', marathonSchema);
@@ -61,11 +63,13 @@ const userSchema = new Schema({
     type: Date,
     default: () => new Date(),
   },
-  marathons: [{
-    type: Schema.Types.ObjectId,
-    default: [],
-    ref: 'Marathon',
-  }]
+  marathons: [
+    {
+      type: Schema.Types.ObjectId,
+      default: [],
+      ref: 'Marathon',
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);
@@ -260,13 +264,13 @@ app.get('/users/:userId/marathons', async (req, res) => {
         response: {
           user: user.username,
           marathons: user.marathons,
-        }
+        },
       });
     } else {
       res.status(404).json({
         success: false,
         response: 'No user with that id was found',
-      })
+      });
     }
   } catch (error) {
     res.status(400).json({
@@ -283,26 +287,25 @@ app.patch('/users/:userId/addMarathon', async (req, res) => {
     if (userId) {
       await User.findByIdAndUpdate(userId, {
         $push: {
-          marathons: marathonToAdd
-        }
-      })
+          marathons: marathonToAdd,
+        },
+      });
 
       const user = await User.findById(userId);
       const marathon = await Marathon.findById(marathonToAdd).populate('name');
 
       res.status(200).json({
         success: true,
-        response: `${marathon.name} added to user with username ${user.username}`
-      })
+        response: `${marathon.name} added to user with username ${user.username}`,
+      });
     }
   } catch (error) {
     res.status(400).json({
       success: false,
-      response: 'Something went wrong'
-    })
+      response: 'Something went wrong',
+    });
   }
-
-})
+});
 
 app.patch('/users/:userId/deleteMarathon', async (req, res) => {
   const { userId } = req.params;
@@ -311,26 +314,27 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
     if (userId) {
       await User.findByIdAndUpdate(userId, {
         $pull: {
-          marathons: marathonToDelete
-        }
-      })
+          marathons: marathonToDelete,
+        },
+      });
 
       const user = await User.findById(userId);
-      const marathon = await Marathon.findById(marathonToDelete).populate('name');
+      const marathon = await Marathon.findById(marathonToDelete).populate(
+        'name'
+      );
 
       res.status(200).json({
         success: true,
-        response: `${marathon.name} deleted from user with username ${user.username}`
-      })
+        response: `${marathon.name} deleted from user with username ${user.username}`,
+      });
     }
   } catch (error) {
     res.status(400).json({
       success: false,
-      response: 'Something went wrong'
-    })
+      response: 'Something went wrong',
+    });
   }
-
-})
+});
 
 // Start the server
 app.listen(port, () => {

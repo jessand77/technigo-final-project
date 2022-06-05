@@ -1,7 +1,7 @@
 import React from 'react'
 import MarathonList from 'components/MarathonList'
 
-export const App = () => {
+const App = () => {
   return (
     <div>
       <h1>Marathons</h1>
@@ -9,3 +9,5 @@ export const App = () => {
     </div>
   )
 }
+
+export default App
