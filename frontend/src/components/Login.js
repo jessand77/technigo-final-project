@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from 'utils/urls';
+import { useNavigate, Link } from 'react-router-dom';
+import Loader from './Loader';
 
-import user from '../reducers/user';
+// Importing the thunk function here
+import user, { postUserData } from '../reducers/user';
+import UserPage from './UserPage';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
@@ -15,14 +17,23 @@ const Login = () => {
 
 	const onFormSubmit = (e) => {
 		e.preventDefault();
-		console.log(username);
-		dispatch(user.actions.setUsername(username));
-		setUsername('');
-	}
+
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			body: JSON.stringify({ username, password }),
+		};
+
+		dispatch(postUserData(options, 'login'));
+	};
 
 	return (
 		<>
 			<h1>Login</h1>
+			<button><Link to="/register">Register</Link></button>
 			<form onSubmit={onFormSubmit}>
 				<label htmlFor="username">Username</label>
 				<input
@@ -40,6 +51,8 @@ const Login = () => {
 				/>
 				<button type="submit">Submit</button>
 			</form>
+			<Loader />
+			<UserPage />
 		</>
 	);
 };
