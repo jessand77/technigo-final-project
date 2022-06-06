@@ -1,19 +1,22 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MarathonList from 'components/MarathonList';
-import Register from 'components/Register';
-import Login from 'components/Login';
-import NotFound from 'components/NotFound';
+import { Provider } from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import AppContainer from 'components/AppContainer';
+
+import user from 'reducers/user';
+import ui from 'reducers/ui';
+
+const reducer = combineReducers({
+  user: user.reducer,
+  ui: ui.reducer
+});
+
+const store = configureStore({ reducer });
 
 export const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MarathonList />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
   );
 };
