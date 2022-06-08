@@ -5,7 +5,6 @@ import MarathonList from './MarathonList';
 const Start = () => {
     return (
         <div>
-            <h1>Start</h1>
             <button><Link to="/login">Login</Link></button>
             <button><Link to="/register">Register</Link></button>
             <MarathonList />

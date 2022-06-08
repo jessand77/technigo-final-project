@@ -9,6 +9,7 @@ const initialState = {
     username: null,
     accessToken: null,
     error: null,
+    marathons: []
 };
 
 const user = createSlice({
@@ -27,6 +28,10 @@ const user = createSlice({
         setError: (store, action) => {
             store.error = action.payload;
         },
+        // Osäker på om det här blir rätt?
+        addMarathon: (store, action) => {
+            state.marathons.push(action.payload)
+        }
     },
 });
 

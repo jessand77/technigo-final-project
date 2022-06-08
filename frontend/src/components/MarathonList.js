@@ -10,9 +10,7 @@ const MarathonList = () => {
 		setIsLoading(true);
 		fetch(BASE_URL + 'marathons')
 			.then((res) => res.json())
-			.then((data) => {
-				setMarathons(data);
-			})
+			.then((data) => setMarathons(data))
 			.catch((error) => console.error(error))
 			.finally(() => setIsLoading(false));
 	};
@@ -27,7 +25,10 @@ const MarathonList = () => {
 			<h2>MarathonList</h2>
 			{isLoading && <h3>Loading...</h3>}
 			{marathons.map((marathon) => (
-				<MarathonCard key={marathon._id} name={marathon.name} />
+				<MarathonCard
+					key={marathon._id}
+					name={marathon.name}
+					city={marathon.city} />
 			))}
 		</>
 	);

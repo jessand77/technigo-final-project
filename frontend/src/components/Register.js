@@ -13,14 +13,21 @@ const Register = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const accessToken = useSelector((store) => store.user.accessToken);
+	const validationError = useSelector((store) => store.user.error);
+
+	useEffect(() => {
+		if (accessToken) {
+			navigate('/registered');
+		}
+	}, [accessToken]);
 
 	const onFormSubmit = (e) => {
 		e.preventDefault();
 
 		const options = {
-			method: "POST",
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 
 			body: JSON.stringify({ username, password }),
@@ -32,7 +39,9 @@ const Register = () => {
 	return (
 		<>
 			<h1>Register</h1>
-			<button><Link to="/login">Login</Link></button>
+			<button>
+				<Link to="/login">Login</Link>
+			</button>
 			<form onSubmit={onFormSubmit}>
 				<label htmlFor="username">Username</label>
 				<input
@@ -51,6 +60,7 @@ const Register = () => {
 				<button type="submit">Submit</button>
 			</form>
 			<Loader />
+			{validationError && <p>{validationError}</p>}
 		</>
 	);
 };
