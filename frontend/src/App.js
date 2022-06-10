@@ -7,16 +7,16 @@ import user from 'reducers/user';
 import ui from 'reducers/ui';
 
 const reducer = combineReducers({
-  user: user.reducer,
-  ui: ui.reducer
+	user: user.reducer,
+	ui: ui.reducer,
 });
 
 const store = configureStore({ reducer });
 
 export const App = () => {
-  return (
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<AppContainer />
+		</Provider>
+	);
 };

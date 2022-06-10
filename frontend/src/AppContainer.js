@@ -6,7 +6,6 @@ import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
 import NotFound from './pages/NotFound';
 
-
 const AppContainer = () => {
 	return (
 		<BrowserRouter>

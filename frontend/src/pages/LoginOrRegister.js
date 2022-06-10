@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import Loader from '../components/Loader';
+import Header from 'components/Header';
 
 // Importing the thunk function here
-import user, { postUserData } from '../reducers/user';
-import UserPage from './UserPage';
+import { postUserData } from '../reducers/user';
+
+const Form = styled.form`
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+`;
 
 const LoginOrRegister = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [mode, setMode] = useState('register');
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const isLoading = useSelector((store) => store.ui.isLoading);
 	const accessToken = useSelector((store) => store.user.accessToken);
 	const validationError = useSelector((store) => store.user.error);
 
@@ -22,28 +32,31 @@ const LoginOrRegister = () => {
 		}
 	}, [accessToken]);
 
-	const onFormSubmit = (e) => {
-		e.preventDefault();
+	const onFormSubmit = (event) => {
+		event.preventDefault();
 
 		const options = {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username, password }),
 		};
 
-		dispatch(postUserData(options, 'login'));
+		dispatch(postUserData(options, mode));
 	};
+
+	const toggleMode = () => {
+		setMode(mode === 'register' ? 'login' : 'register');
+	};
+
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<>
-			<h1>Login</h1>
-			<button>
-				<Link to="/register">Register</Link>
-			</button>
-			<form onSubmit={onFormSubmit}>
+			<Header />
+			<h1>{mode === 'register' ? 'Register' : 'Login'}</h1>
+			<Form onSubmit={onFormSubmit}>
 				<label htmlFor="username">Username</label>
 				<input
 					type="text"
@@ -58,11 +71,14 @@ const LoginOrRegister = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<button type="submit">Submit</button>
-			</form>
+				<button type="submit">
+					{mode === 'register' ? 'register' : 'login'}
+				</button>
+			</Form>
 			<Loader />
 			{validationError && <p>{validationError}</p>}
-			<UserPage />
+			{mode === 'register' ? 'Click to login' : 'Click to register'}
+			<button onClick={toggleMode}>Ok</button>
 		</>
 	);
 };
