@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import AppContainer from 'components/AppContainer';
+import AppContainer from 'AppContainer';
 
 import user from 'reducers/user';
 import ui from 'reducers/ui';

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import Loader from './Loader';
+import Loader from '../components/Loader';
 
 // Importing the thunk function here
 import user, { postUserData } from '../reducers/user';
 import UserPage from './UserPage';
 
-const Login = () => {
+const LoginOrRegister = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -67,4 +67,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default LoginOrRegister;
