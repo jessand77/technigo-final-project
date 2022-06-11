@@ -7,10 +7,13 @@ import user from '../reducers/user';
 
 const StyledHeader = styled.header`
 	background-color: aliceblue;
+	padding: 10px;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
+	a {
+		text-decoration: none;
+	}
 `;
 
 const UserPageHeader = () => {
@@ -24,7 +27,6 @@ const UserPageHeader = () => {
 
 	return (
 		<StyledHeader>
-			<p>Userpage header</p>
 			<Link to="/">Hem</Link>
 			<button onClick={handleLogout}>Logout</button>
 		</StyledHeader>

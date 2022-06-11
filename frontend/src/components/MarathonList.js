@@ -35,7 +35,8 @@ const MarathonList = () => {
 	return (
 		<>
 			{/* Remove inline styling later */}
-			<h2 style={{ textAlign: 'center', color: 'blue' }}>MarathonList</h2>
+			<h2 style={{ textAlign: 'center', color: 'blue' }}>All marathons</h2>
+			
 			{isLoading ? (
 				<h3>Loading</h3>
 			) : (

@@ -311,6 +311,16 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	}
 });
 
+// Se till att det bara går att ta bort sin egen profil!
+app.delete('/users/:userId/deleteUser', async (req, res) => {
+	const { userId } = req.params;
+	await User.findByIdAndDelete(userId);
+	res.status(200).json({
+		success: true,
+		response: `User with user id ${userId} was successfully deleted.`,
+	});
+});
+
 // Start the server
 app.listen(port, () => {
 	console.log(`Server running on http://localhost:${port}`);
