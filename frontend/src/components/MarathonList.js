@@ -45,6 +45,9 @@ const MarathonList = () => {
 							key={marathon._id}
 							name={marathon.name}
 							city={marathon.city}
+							country={marathon.country}
+							url={marathon.website}
+							image={marathon.image}
 						/>
 					))}
 				</CardContainer>

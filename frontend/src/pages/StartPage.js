@@ -44,7 +44,7 @@ const StartPage = () => {
 			<StartPageSection>
 				<TextBox>
 					<h1>Start page</h1>
-					<button onClick={handleClick}>Login</button>
+					<button onClick={handleClick}>Login or register</button>
 				</TextBox>
 			</StartPageSection>
 		</>
