@@ -19,7 +19,7 @@ const UserPageHeader = () => {
 
 	const handleLogout = () => {
 		dispatch(user.actions.setAccessToken(null));
-		navigate('/');
+		navigate('/loggedout');
 	};
 
 	return (

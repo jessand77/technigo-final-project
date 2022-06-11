@@ -35,12 +35,8 @@ const user = createSlice({
 
 // mode is either 'login' or 'register'
 export const postUserData = (options, mode) => {
-	console.log(options);
-	console.log(mode);
-	const url = BASE_URL + mode;
-	console.log(url);
 	return (dispatch) => {
-		fetch(url, options)
+		fetch(BASE_URL + mode, options)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
