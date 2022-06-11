@@ -27,7 +27,10 @@ const UserPageHeader = () => {
 
 	return (
 		<StyledHeader>
-			<Link to="/">Hem</Link>
+			<button>
+				<Link to="/">Hem</Link>
+			</button>
+			<button>My marathons</button>
 			<button onClick={handleLogout}>Logout</button>
 		</StyledHeader>
 	);

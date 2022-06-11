@@ -8,6 +8,9 @@ import MarathonList from 'components/MarathonList';
 const UserPageSection = styled.section`
 	background-color: lavender;
 	padding: 10px;
+	span {
+		color: grey;
+	}
 `;
 
 const UserPage = () => {
@@ -21,7 +24,9 @@ const UserPage = () => {
 				<h1>You have no access to this page</h1>
 			) : (
 				<UserPageSection>
-					<h1>Hej {username}!</h1>
+					<h1>
+						Hej <span>{username}</span>!
+					</h1>
 					<h2>Här är några marathonlopp att välja mellan</h2>
 					<MarathonList />
 				</UserPageSection>

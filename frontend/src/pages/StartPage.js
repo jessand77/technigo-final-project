@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Header from 'components/Header';
@@ -32,11 +33,17 @@ const TextBox = styled.div`
 `;
 
 const StartPage = () => {
+	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		navigate('/login');
+		hasAccessToken ? navigate('/userpage') : navigate('/login');
 	};
+
+	let buttonText;
+	hasAccessToken
+		? (buttonText = 'To user page')
+		: (buttonText = 'Login or register');
 
 	return (
 		<>
@@ -44,7 +51,7 @@ const StartPage = () => {
 			<StartPageSection>
 				<TextBox>
 					<h1>Start page</h1>
-					<button onClick={handleClick}>Login or register</button>
+					<button onClick={handleClick}>{buttonText}</button>
 				</TextBox>
 			</StartPageSection>
 		</>
