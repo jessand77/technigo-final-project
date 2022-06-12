@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { BASE_URL } from 'utils/urls';
+
 import user from 'reducers/user';
 
 const StyledCard = styled.div`
@@ -35,14 +37,44 @@ const MarathonCard = (props) => {
 	);
 	console.log(isInUsersList);
 
+	const userId = useSelector((store) => store.user.userId);
+	const accessToken = useSelector((store) => store.user.accessToken);
+
 	const dispatch = useDispatch();
 
-	const addMarathon = () => {
-		dispatch(user.actions.addMarathon(id));
-	};
+	// const addMarathon = () => {
+	// 	dispatch(user.actions.addMarathon(id));
+	// };
 
 	const deleteMarathon = () => {
 		dispatch(user.actions.deleteMarathon(id));
+	};
+
+	// Added this function but delete if it doesn't work
+	const addMarathon = () => {
+		const marathonToAdd = id;
+
+		const url = `${BASE_URL}users/${userId}/addMarathon`;
+
+		console.log(url);
+		console.log(accessToken);
+
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+			body: JSON.stringify({ marathonToAdd }),
+		};
+
+		console.log(options);
+
+		fetch(`${BASE_URL}users/${userId}/addMarathon`, options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			});
 	};
 
 	return (

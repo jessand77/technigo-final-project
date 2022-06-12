@@ -17,8 +17,8 @@ const UserPageSection = styled.section`
 const UserPage = () => {
 	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const username = useSelector((store) => store.user.username);
-	const marathons = useSelector((store) => store.user.marathons);
 
+	const marathons = useSelector((store) => store.user.marathons);
 	console.log(marathons.length);
 
 	if (!hasAccessToken) {

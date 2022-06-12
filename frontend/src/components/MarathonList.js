@@ -37,9 +37,8 @@ const MarathonList = () => {
 		getMarathons();
 	}, []);
 
+	// Remove this function when the add and delete buttons in cards work
 	const saveMarathons = () => {
-		// console.log(completedMarathons);
-
 		const marathonToAdd = '62a5abbf15cb1748d3bc2b15';
 
 		const url = `${BASE_URL}users/${userId}/addMarathon`;
