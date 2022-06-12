@@ -34,9 +34,9 @@ const MarathonCard = (props) => {
 	const addMarathon = () => {
 		console.log(id);
 		dispatch(user.actions.addMarathon(id));
-
-		
 	};
+
+	
 
 	return (
 		<>
