@@ -55,11 +55,13 @@ export const postUserData = (options, mode) => {
 					dispatch(user.actions.setUsername(data.username));
 					dispatch(user.actions.setAccessToken(data.accessToken));
 					dispatch(user.actions.setAccessToken(data.accessToken));
+					dispatch(user.actions.setMarathons(data.marathons));
 					dispatch(user.actions.setError(null));
 				} else {
 					dispatch(user.actions.setUserId(null));
 					dispatch(user.actions.setUsername(null));
 					dispatch(user.actions.setAccessToken(null));
+					dispatch(user.actions.setMarathons([]));
 					dispatch(user.actions.setError(data.message));
 				}
 			});

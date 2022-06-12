@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BASE_URL } from '../utils/urls';
 import MarathonCard from './MarathonCard';
+import Button from './Button';
 
 import ui from '../reducers/ui';
 
@@ -42,6 +43,7 @@ const MarathonList = () => {
 		const marathonToAdd = '62a5abbf15cb1748d3bc2b15';
 
 		const url = `${BASE_URL}users/${userId}/addMarathon`;
+
 		console.log(url);
 		console.log(accessToken);
 
@@ -65,27 +67,25 @@ const MarathonList = () => {
 
 	return (
 		<>
-			{/* Remove inline styling later */}
-			<h2 style={{ textAlign: 'center', color: 'blue' }}>All marathons</h2>
-
-			<button onClick={saveMarathons}>Update your marathons</button>
-
+			<Button text="Save your marathons" handleClick={saveMarathons}></Button>
 			{isLoading ? (
 				<h3>Loading</h3>
 			) : (
-				<CardContainer>
-					{marathons.map((marathon) => (
-						<MarathonCard
-							key={marathon._id}
-							id={marathon._id}
-							name={marathon.name}
-							city={marathon.city}
-							country={marathon.country}
-							url={marathon.website}
-							image={marathon.image}
-						/>
-					))}
-				</CardContainer>
+				<>
+					<CardContainer>
+						{marathons.map((marathon) => (
+							<MarathonCard
+								key={marathon._id}
+								id={marathon._id}
+								name={marathon.name}
+								city={marathon.city}
+								country={marathon.country}
+								url={marathon.website}
+								image={marathon.image}
+							/>
+						))}
+					</CardContainer>
+				</>
 			)}
 		</>
 	);

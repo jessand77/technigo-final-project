@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Button from 'components/Button';
 
 import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
 
@@ -18,15 +19,11 @@ const StartPageSection = styled.section`
 const TextBox = styled.div`
 	background: white;
 	color: black;
-	font-size: 30px;
-	h1 {
-		margin: 15px;
-	}
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 20px;
+	padding: 10px;
 `;
 
 const EndPage = () => {
@@ -40,8 +37,8 @@ const EndPage = () => {
 		<>
 			<StartPageSection>
 				<TextBox>
-					<h1>End page</h1>
-					<button onClick={handleClick}>Take me to start again</button>
+					<p>Take me back to the start page</p>
+					<Button text="OK" handleClick={handleClick}></Button>
 				</TextBox>
 			</StartPageSection>
 		</>

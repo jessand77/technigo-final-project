@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -29,22 +29,34 @@ const StyledCard = styled.div`
 const MarathonCard = (props) => {
 	const { id, name, city, country, url, image } = props;
 
+	// Check if this marathon is already in the logged in user's list
+	const isInUsersList = useSelector((store) => store.user.marathons).includes(
+		id
+	);
+	console.log(isInUsersList);
+
 	const dispatch = useDispatch();
 
 	const addMarathon = () => {
-		console.log(id);
 		dispatch(user.actions.addMarathon(id));
 	};
 
-	
+	const deleteMarathon = () => {
+		dispatch(user.actions.deleteMarathon(id));
+	};
 
 	return (
 		<>
 			<StyledCard>
 				<h2>{name}</h2>
-				<label htmlFor="run">Add to my list</label>
-				<input type="checkbox" id="run" />
-				<button onClick={addMarathon}>Add to my list</button>
+				{/* <label htmlFor="run">Add to my list</label>
+				<input type="checkbox" id="run" /> */}
+				{!isInUsersList ? (
+					<button onClick={addMarathon}>Add race</button>
+				) : (
+					<button onClick={deleteMarathon}>Delete race</button>
+				)}
+
 				<p>
 					{city}, {country}
 				</p>

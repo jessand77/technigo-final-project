@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Button from './Button';
 
 import user from '../reducers/user';
 
@@ -27,11 +28,10 @@ const UserPageHeader = () => {
 
 	return (
 		<StyledHeader>
-			<button>
-				<Link to="/">Hem</Link>
-			</button>
-			<button>My marathons</button>
-			<button onClick={handleLogout}>Logout</button>
+			<Link to="/">
+				<Button text="Home"></Button>
+			</Link>
+			<Button text="Logout" handleClick={handleLogout}></Button>
 		</StyledHeader>
 	);
 };

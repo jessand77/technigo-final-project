@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import styled from 'styled-components';
+import Button from './Button';
 
 const StyledHeader = styled.header`
 	background-color: aliceblue;
@@ -14,9 +14,11 @@ const StyledHeader = styled.header`
 const Header = () => {
 	return (
 		<StyledHeader>
-			<p>Header</p>
+			<p>Main header</p>
 			<p>
-				<Link to="/">Hem</Link>
+				<Link to="/">
+					<Button text="Home" color={'pink'} />
+				</Link>
 			</p>
 		</StyledHeader>
 	);

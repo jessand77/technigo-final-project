@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
 import Header from 'components/Header';
+import Button from 'components/Button';
 
 // Importing the thunk function here
 import { postUserData } from '../reducers/user';
@@ -63,6 +64,7 @@ const LoginOrRegister = () => {
 					id="username"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
+					required
 				/>
 				<label htmlFor="password">Password</label>
 				<input
@@ -70,15 +72,20 @@ const LoginOrRegister = () => {
 					id="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
+					required
 				/>
-				<button type="submit">
-					{mode === 'register' ? 'register' : 'login'}
-				</button>
+				<Button
+					type="submit"
+					text={mode === 'register' ? 'register' : 'login'}
+				></Button>
 			</Form>
 			<Loader />
 			{validationError && <p>{validationError}</p>}
-			{mode === 'register' ? 'Click to login' : 'Click to register'}
-			<button onClick={toggleMode}>Ok</button>
+			{mode === 'register' ? 'Already have an account?' : 'Click to register'}
+			<Button
+				text={mode === 'register' ? 'login' : 'register'}
+				handleClick={toggleMode}
+			></Button>
 		</>
 	);
 };

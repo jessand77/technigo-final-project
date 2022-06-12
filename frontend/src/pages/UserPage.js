@@ -10,13 +10,16 @@ const UserPageSection = styled.section`
 	background-color: lavender;
 	padding: 10px;
 	span {
-		color: grey;
+		color: violet;
 	}
 `;
 
 const UserPage = () => {
 	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const username = useSelector((store) => store.user.username);
+	const marathons = useSelector((store) => store.user.marathons);
+
+	console.log(marathons.length);
 
 	if (!hasAccessToken) {
 		return (
@@ -32,9 +35,9 @@ const UserPage = () => {
 			<UserPageHeader />
 			<UserPageSection>
 				<h1>
-					Hej <span>{username}</span>!
+					Hello <span>{username}</span>!
 				</h1>
-				<h2>Här är några marathonlopp att välja mellan</h2>
+				<p>Add marathons to your list</p>
 				<MarathonList />
 			</UserPageSection>
 		</>
