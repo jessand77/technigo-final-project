@@ -26,13 +26,20 @@ const user = createSlice({
 		setError: (store, action) => {
 			store.error = action.payload;
 		},
+		// Osäker på dessa marathonrelated ones
+		// Har gjort ungefär som i project-todos
 		setMarathons: (store, action) => {
 			store.marathons = action.payload;
-		}
-		// // Osäker på om det här blir rätt?
-		// addMarathon: (store, action) => {
-		// 	state.marathons.push(action.payload);
-		// },
+		},
+		addMarathon: (store, action) => {
+			store.marathons.push(action.payload);
+		},
+		deleteMarathon: (store, action) => {
+			store.marathons.splice(action.payload, 1);
+		},
+		removeAllMarathons: (store, action) => {
+			store.marathons = [];
+		},
 	},
 });
 
@@ -58,7 +65,5 @@ export const postUserData = (options, mode) => {
 			});
 	};
 };
-
-
 
 export default user;

@@ -15,6 +15,10 @@ const CardContainer = styled.section`
 const MarathonList = () => {
 	const [marathons, setMarathons] = useState([]);
 
+	const completedMarathons = useSelector((store) => store.user.marathons);
+	const userId = useSelector((store) => store.user.userId);
+	const accessToken = useSelector((store) => store.user.accessToken);
+
 	const isLoading = useSelector((store) => store.ui.isLoading);
 	const dispatch = useDispatch();
 
@@ -32,11 +36,40 @@ const MarathonList = () => {
 		getMarathons();
 	}, []);
 
+	const saveMarathons = () => {
+		// console.log(completedMarathons);
+
+		const marathonToAdd = '62a5abbf15cb1748d3bc2b15';
+
+		const url = `${BASE_URL}users/${userId}/addMarathon`;
+		console.log(url);
+		console.log(accessToken);
+
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+			body: JSON.stringify({ marathonToAdd }),
+		};
+
+		console.log(options);
+
+		fetch(`${BASE_URL}users/${userId}/addMarathon`, options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			});
+	};
+
 	return (
 		<>
 			{/* Remove inline styling later */}
 			<h2 style={{ textAlign: 'center', color: 'blue' }}>All marathons</h2>
-			
+
+			<button onClick={saveMarathons}>Update your marathons</button>
+
 			{isLoading ? (
 				<h3>Loading</h3>
 			) : (
@@ -44,6 +77,7 @@ const MarathonList = () => {
 					{marathons.map((marathon) => (
 						<MarathonCard
 							key={marathon._id}
+							id={marathon._id}
 							name={marathon.name}
 							city={marathon.city}
 							country={marathon.country}

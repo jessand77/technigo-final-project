@@ -1,5 +1,8 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+
+import user from 'reducers/user';
 
 const StyledCard = styled.div`
 	border: 1px solid black;
@@ -24,8 +27,16 @@ const StyledCard = styled.div`
 `;
 
 const MarathonCard = (props) => {
-	
-	const { name, city, country, url, image } = props;
+	const { id, name, city, country, url, image } = props;
+
+	const dispatch = useDispatch();
+
+	const addMarathon = () => {
+		console.log(id);
+		dispatch(user.actions.addMarathon(id));
+
+		
+	};
 
 	return (
 		<>
@@ -33,7 +44,7 @@ const MarathonCard = (props) => {
 				<h2>{name}</h2>
 				<label htmlFor="run">Add to my list</label>
 				<input type="checkbox" id="run" />
-				<button>Add to my list</button>
+				<button onClick={addMarathon}>Add to my list</button>
 				<p>
 					{city}, {country}
 				</p>
