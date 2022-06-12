@@ -19,7 +19,6 @@ const UserPage = () => {
 	const username = useSelector((store) => store.user.username);
 
 	const marathons = useSelector((store) => store.user.marathons);
-	console.log(marathons.length);
 
 	if (!hasAccessToken) {
 		return (

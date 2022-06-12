@@ -31,10 +31,14 @@ const StyledCard = styled.div`
 const MarathonCard = (props) => {
 	const { id, name, city, country, url, image } = props;
 
-	// Check if this marathon is already in the logged in user's list
-	const isInUsersList = useSelector((store) => store.user.marathons).includes(
-		id
-	);
+	const usersList = useSelector((store) => store.user.marathons);
+	let isInUsersList = false;
+	usersList
+		? (isInUsersList = useSelector((store) => store.user.marathons).includes(
+				id
+		  ))
+		: false;
+
 	console.log(isInUsersList);
 
 	const userId = useSelector((store) => store.user.userId);

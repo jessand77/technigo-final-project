@@ -66,7 +66,7 @@ const userSchema = new Schema({
 	marathons: [
 		{
 			type: Schema.Types.ObjectId,
-			default: null,
+			default: [],
 			ref: 'Marathon',
 		},
 	],
