@@ -168,5 +168,15 @@
 		"website": "https://www.jooks.ee/en/tallinn-marathon/",
 		"image": "https://res.cloudinary.com/ded0zbgti/image/upload/v1654957433/marathons/mari-mur-1jEA5IDonqE-unsplash_ldxktv.jpg",
 		"unsplashLink": "https://unsplash.com/photos/uFGi0_YciE0?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink"
+	},
+	{
+		"name": "Vienna Marathon",
+		"city": "Vienna",
+		"lat": 48.20821,
+		"lon": 16.38002,
+		"country": "Austria",
+		"website": "https://www.vienna-marathon.com/",
+		"image": "https://res.cloudinary.com/ded0zbgti/image/upload/v1654957433/marathons/mari-mur-1jEA5IDonqE-unsplash_ldxktv.jpg",
+		"unsplashLink": "https://unsplash.com/photos/uFGi0_YciE0?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink"
 	}
 ]

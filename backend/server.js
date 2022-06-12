@@ -66,13 +66,21 @@ const userSchema = new Schema({
 	marathons: [
 		{
 			type: Schema.Types.ObjectId,
-			default: [],
+			default: null,
 			ref: 'Marathon',
 		},
 	],
 });
 
 const User = mongoose.model('User', userSchema);
+
+// if (process.env.RESET_DB) {
+// 	console.log('Resetting database');
+// 	const seedDatabase = async () => {
+// 		await User.deleteMany();
+// 	};
+// 	seedDatabase();
+// }
 
 app.use((req, res, next) => {
 	if (mongoose.connection.readyState === 1) {
@@ -89,9 +97,9 @@ app.get('/', (req, res) => {
 });
 
 //Testar process.env
-app.get('/secret', (req, res) => {
-	res.send(process.env.SECRET_KEY);
-});
+// app.get('/secret', (req, res) => {
+// 	res.send(process.env.SECRET_KEY);
+// });
 
 // Gets the races from internal json file
 app.get('/marathonsfromfile', (req, res) => {
@@ -135,6 +143,7 @@ app.get('/marathons/:id', async (req, res) => {
 	}
 });
 
+// ---------- Register endpoint ----------
 app.post('/register', async (req, res) => {
 	const { username, password } = req.body;
 	try {
@@ -167,6 +176,7 @@ app.post('/register', async (req, res) => {
 	}
 });
 
+// ------------ Login endpoint ------------
 app.post('/login', async (req, res) => {
 	const { username, password } = req.body;
 	try {
@@ -195,6 +205,7 @@ app.post('/login', async (req, res) => {
 	}
 });
 
+// Check if the accesstoken is valid
 const authenticateUser = async (req, res, next) => {
 	const accessToken = req.header('Authorization');
 	try {
@@ -216,6 +227,7 @@ const authenticateUser = async (req, res, next) => {
 	}
 };
 
+// ---------- Authenticated endpoint to get all users ----------
 app.get('/users', authenticateUser);
 app.get('/users', async (req, res) => {
 	try {
@@ -228,6 +240,7 @@ app.get('/users', async (req, res) => {
 	}
 });
 
+// --------- Get all marathons of a specific user
 app.get('/users/:userId/marathons', async (req, res) => {
 	const { userId } = req.params;
 	try {
@@ -311,14 +324,23 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	}
 });
 
-// Se till att det bara går att ta bort sin egen profil!
-app.delete('/users/:userId/deleteUser', async (req, res) => {
+app.delete('/users/:userId', authenticateUser);
+app.delete('/users/:userId', async (req, res) => {
 	const { userId } = req.params;
-	await User.findByIdAndDelete(userId);
-	res.status(200).json({
-		success: true,
-		response: `User with user id ${userId} was successfully deleted.`,
-	});
+
+	try {
+		await User.deleteOne({ _id: userId });
+		res.status(200).json({
+			success: true,
+			response: `User with user id ${userId} was successfully deleted.`,
+		});
+	} catch (error) {
+		res.status(400).json({
+			success: false,
+			response: "Something went wrong, couldn't delete user account",
+			error,
+		});
+	}
 });
 
 // Start the server

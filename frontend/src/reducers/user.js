@@ -26,10 +26,13 @@ const user = createSlice({
 		setError: (store, action) => {
 			store.error = action.payload;
 		},
-		// Osäker på om det här blir rätt?
-		addMarathon: (store, action) => {
-			state.marathons.push(action.payload);
-		},
+		setMarathons: (store, action) => {
+			store.marathons = action.payload;
+		}
+		// // Osäker på om det här blir rätt?
+		// addMarathon: (store, action) => {
+		// 	state.marathons.push(action.payload);
+		// },
 	},
 });
 
@@ -44,6 +47,7 @@ export const postUserData = (options, mode) => {
 					dispatch(user.actions.setUserId(data.userId));
 					dispatch(user.actions.setUsername(data.username));
 					dispatch(user.actions.setAccessToken(data.accessToken));
+					dispatch(user.actions.setAccessToken(data.accessToken));
 					dispatch(user.actions.setError(null));
 				} else {
 					dispatch(user.actions.setUserId(null));
@@ -54,5 +58,7 @@ export const postUserData = (options, mode) => {
 			});
 	};
 };
+
+
 
 export default user;

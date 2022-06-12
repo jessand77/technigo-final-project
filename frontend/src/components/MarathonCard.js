@@ -24,6 +24,7 @@ const StyledCard = styled.div`
 `;
 
 const MarathonCard = (props) => {
+	
 	const { name, city, country, url, image } = props;
 
 	return (
@@ -32,6 +33,7 @@ const MarathonCard = (props) => {
 				<h2>{name}</h2>
 				<label htmlFor="run">Add to my list</label>
 				<input type="checkbox" id="run" />
+				<button>Add to my list</button>
 				<p>
 					{city}, {country}
 				</p>
