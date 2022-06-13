@@ -37,36 +37,8 @@ const MarathonList = () => {
 		getMarathons();
 	}, []);
 
-	// Remove this function when the add and delete buttons in cards work
-	const saveMarathons = () => {
-		const marathonToAdd = '62a5abbf15cb1748d3bc2b15';
-
-		const url = API_URL(`users/${userId}/addMarathon`);
-
-		console.log(url);
-		console.log(accessToken);
-
-		const options = {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: accessToken,
-			},
-			body: JSON.stringify({ marathonToAdd }),
-		};
-
-		console.log(options);
-
-		fetch(url, options)
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-			});
-	};
-
 	return (
 		<>
-			<Button text="Save your marathons" handleClick={saveMarathons}></Button>
 			{isLoading ? (
 				<h3>Loading</h3>
 			) : (

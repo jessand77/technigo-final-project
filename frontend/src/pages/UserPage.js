@@ -18,7 +18,7 @@ const UserPage = () => {
 	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const username = useSelector((store) => store.user.username);
 
-	const marathons = useSelector((store) => store.user.marathons);
+	const userMarathons = useSelector((store) => store.user.marathons);
 
 	if (!hasAccessToken) {
 		return (
@@ -36,7 +36,7 @@ const UserPage = () => {
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
-				<p>Add marathons to your list</p>
+				<p>Add some marathons to your bucket list</p>
 				<MarathonList />
 			</UserPageSection>
 		</>
