@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, batch } from 'react-redux';
 import styled from 'styled-components';
 
 import { API_URL } from 'utils/urls';
@@ -39,29 +39,31 @@ const MarathonCard = (props) => {
 		  ))
 		: false;
 
-	console.log(isInUsersList);
-
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
 
 	const dispatch = useDispatch();
 
-	// const addMarathon = () => {
-	// 	dispatch(user.actions.addMarathon(id));
-	// };
-
-	const deleteMarathon = () => {
-		dispatch(user.actions.deleteMarathon(id));
+	const updateMarathonArray = () => {
+		fetch(API_URL(`users/${userId}/marathons`))
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.success) {
+					batch(() => {
+						dispatch(user.actions.setMarathons(data.response.marathons));
+						dispatch(user.actions.setError(null));
+					});
+				} else {
+					batch(() => {
+						dispatch(user.actions.setError(data.response));
+					});
+				}
+			});
 	};
 
-	// Added this function but delete if it doesn't work
 	const addMarathon = () => {
 		const marathonToAdd = id;
-
-		const url = API_URL(`users/${userId}/addMarathon`);
-
-		console.log(url);
-		console.log(accessToken);
 
 		const options = {
 			method: 'PATCH',
@@ -72,12 +74,31 @@ const MarathonCard = (props) => {
 			body: JSON.stringify({ marathonToAdd }),
 		};
 
-		console.log(options);
-
-		fetch(url, options)
+		fetch(API_URL(`users/${userId}/addMarathon`), options)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				console.log(data.response);
+				updateMarathonArray();
+			});
+	};
+
+	const deleteMarathon = () => {
+		const marathonToDelete = id;
+
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+			body: JSON.stringify({ marathonToDelete }),
+		};
+
+		fetch(API_URL(`users/${userId}/deleteMarathon`), options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data.response);
+				updateMarathonArray();
 			});
 	};
 
