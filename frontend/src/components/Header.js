@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Button from './Button';
 
 const StyledHeader = styled.header`
-	background-color: aliceblue;
+	background-color: #adebad;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -14,10 +14,9 @@ const StyledHeader = styled.header`
 const Header = () => {
 	return (
 		<StyledHeader>
-			<p>Main header</p>
 			<p>
 				<Link to="/">
-					<Button text="Home" color={'pink'} />
+					<Button text="Home" />
 				</Link>
 			</p>
 		</StyledHeader>

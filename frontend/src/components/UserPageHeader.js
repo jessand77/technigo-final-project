@@ -31,6 +31,7 @@ const UserPageHeader = () => {
 			<Link to="/">
 				<Button text="Home"></Button>
 			</Link>
+			<Button text="Bucket list" color="grey"></Button>
 			<Button text="Logout" handleClick={handleLogout}></Button>
 		</StyledHeader>
 	);

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Header from 'components/Header';
+import Button from 'components/Button';
 
 import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
 
@@ -51,7 +52,7 @@ const StartPage = () => {
 			<StartPageSection>
 				<TextBox>
 					<h1>Start page</h1>
-					<button onClick={handleClick}>{buttonText}</button>
+					<Button handleClick={handleClick} text={buttonText}></Button>
 				</TextBox>
 			</StartPageSection>
 		</>

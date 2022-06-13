@@ -8,13 +8,16 @@ import Button from 'components/Button';
 
 import { API_URL } from 'utils/urls';
 
-// Importing the thunk function here
 import user from '../reducers/user';
 
 const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	button {
+		margin-bottom: 20px;
+		align-self: flex-start;
+	}
 `;
 
 const LoginOrRegister = () => {
@@ -47,7 +50,6 @@ const LoginOrRegister = () => {
 		fetch(API_URL(mode), options)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.marathons);
 				if (data.success) {
 					batch(() => {
 						dispatch(user.actions.setUserId(data.userId));
@@ -100,14 +102,14 @@ const LoginOrRegister = () => {
 				/>
 				<Button
 					type="submit"
-					text={mode === 'register' ? 'register' : 'login'}
+					text={mode === 'register' ? 'Sign up' : 'Log in'}
 				></Button>
 			</Form>
 			<Loader />
 			{validationError && <p>{validationError}</p>}
-			{mode === 'register' ? 'Already have an account?' : 'Click to register'}
+			{mode === 'register' ? <p>Already have an account?</p> : <p>No account yet?</p>}
 			<Button
-				text={mode === 'register' ? 'login' : 'register'}
+				text={mode === 'register' ? 'Log in' : 'Sign up'}
 				handleClick={toggleMode}
 			></Button>
 		</>

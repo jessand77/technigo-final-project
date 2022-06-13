@@ -10,7 +10,7 @@ const UserPageSection = styled.section`
 	background-color: lavender;
 	padding: 10px;
 	span {
-		color: violet;
+		color: green;
 	}
 `;
 

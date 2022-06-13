@@ -32,12 +32,9 @@ const MarathonCard = (props) => {
 	const { id, name, city, country, url, image } = props;
 
 	const usersList = useSelector((store) => store.user.marathons);
-	let isInUsersList = false;
-	usersList
-		? (isInUsersList = useSelector((store) => store.user.marathons).includes(
-				id
-		  ))
-		: false;
+	let isInUsersList = useSelector((store) => store.user.marathons).includes(
+		id
+	)
 
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -113,7 +110,6 @@ const MarathonCard = (props) => {
 				) : (
 					<button onClick={deleteMarathon}>Delete race</button>
 				)}
-
 				<p>
 					{city}, {country}
 				</p>
