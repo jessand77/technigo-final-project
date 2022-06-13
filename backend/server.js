@@ -157,6 +157,7 @@ app.post('/register', async (req, res) => {
 			userId: newUser._id,
 			username: newUser.username,
 			accessToken: newUser.accessToken,
+			marathons: newUser.marathons,
 		});
 	} catch (error) {
 		if (error.code === 11000) {

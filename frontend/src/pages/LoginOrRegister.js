@@ -6,8 +6,10 @@ import Loader from '../components/Loader';
 import Header from 'components/Header';
 import Button from 'components/Button';
 
+import { API_URL } from 'utils/urls';
+
 // Importing the thunk function here
-import { postUserData } from '../reducers/user';
+import user from '../reducers/user';
 
 const Form = styled.form`
 	display: flex;
@@ -42,7 +44,29 @@ const LoginOrRegister = () => {
 			body: JSON.stringify({ username, password }),
 		};
 
-		dispatch(postUserData(options, mode));
+		fetch(API_URL(mode), options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data.marathons);
+				if (data.success) {
+					batch(() => {
+						dispatch(user.actions.setUserId(data.userId));
+						dispatch(user.actions.setUsername(data.username));
+						dispatch(user.actions.setAccessToken(data.accessToken));
+						dispatch(user.actions.setAccessToken(data.accessToken));
+						dispatch(user.actions.setMarathons(data.marathons));
+						dispatch(user.actions.setError(null));
+					});
+				} else {
+					batch(() => {
+						dispatch(user.actions.setUserId(null));
+						dispatch(user.actions.setUsername(null));
+						dispatch(user.actions.setAccessToken(null));
+						dispatch(user.actions.setMarathons([]));
+						dispatch(user.actions.setError(data.message));
+					});
+				}
+			});
 	};
 
 	const toggleMode = () => {
