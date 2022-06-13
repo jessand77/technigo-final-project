@@ -74,13 +74,13 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// if (process.env.RESET_DB) {
-// 	console.log('Resetting database');
-// 	const seedDatabase = async () => {
-// 		await User.deleteMany();
-// 	};
-// 	seedDatabase();
-// }
+if (process.env.RESET_DB) {
+	console.log('Resetting database');
+	const seedDatabase = async () => {
+		await User.deleteMany();
+	};
+	seedDatabase();
+}
 
 app.use((req, res, next) => {
 	if (mongoose.connection.readyState === 1) {
@@ -89,8 +89,6 @@ app.use((req, res, next) => {
 		res.status(503).json({ error: 'Service unavailable' });
 	}
 });
-
-// app.use('/', marathonRoutes, userRoutes);
 
 app.get('/', (req, res) => {
 	res.send(listEndpoints(app));

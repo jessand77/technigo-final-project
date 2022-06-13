@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { BASE_URL } from '../utils/urls';
+import { API_URL } from '../utils/urls';
 import MarathonCard from './MarathonCard';
 import Button from './Button';
 
@@ -26,7 +26,7 @@ const MarathonList = () => {
 	const getMarathons = () => {
 		dispatch(ui.actions.setLoading(true));
 
-		fetch(BASE_URL + 'marathons')
+		fetch(API_URL("marathons"))
 			.then((res) => res.json())
 			.then((data) => setMarathons(data))
 			.catch((error) => console.error(error))
@@ -41,7 +41,7 @@ const MarathonList = () => {
 	const saveMarathons = () => {
 		const marathonToAdd = '62a5abbf15cb1748d3bc2b15';
 
-		const url = `${BASE_URL}users/${userId}/addMarathon`;
+		const url = API_URL(`users/${userId}/addMarathon`);
 
 		console.log(url);
 		console.log(accessToken);
@@ -57,7 +57,7 @@ const MarathonList = () => {
 
 		console.log(options);
 
-		fetch(`${BASE_URL}users/${userId}/addMarathon`, options)
+		fetch(url, options)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);

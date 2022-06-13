@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { BASE_URL } from 'utils/urls';
+import { API_URL } from 'utils/urls';
 
 import user from 'reducers/user';
 
@@ -58,7 +58,7 @@ const MarathonCard = (props) => {
 	const addMarathon = () => {
 		const marathonToAdd = id;
 
-		const url = `${BASE_URL}users/${userId}/addMarathon`;
+		const url = API_URL(`users/${userId}/addMarathon`);
 
 		console.log(url);
 		console.log(accessToken);
@@ -74,7 +74,7 @@ const MarathonCard = (props) => {
 
 		console.log(options);
 
-		fetch(`${BASE_URL}users/${userId}/addMarathon`, options)
+		fetch(url, options)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);

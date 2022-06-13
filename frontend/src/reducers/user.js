@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { BASE_URL } from 'utils/urls';
+import { API_URL } from 'utils/urls';
 
 const initialState = {
 	userId: null,
@@ -46,7 +46,8 @@ const user = createSlice({
 // mode is either 'login' or 'register'
 export const postUserData = (options, mode) => {
 	return (dispatch) => {
-		fetch(BASE_URL + mode, options)
+		console.log(API_URL(mode));
+		fetch(API_URL(mode), options)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
