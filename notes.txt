@@ -3,3 +3,4 @@ Todo
 # Fix delete user route in server.js
 
 # Fix function to show info about separate marathon in own component and fetch data from backend
+

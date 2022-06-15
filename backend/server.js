@@ -7,12 +7,7 @@ import crypto from 'crypto';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
-// Delete this later when the data from MongoDB works?
 import marathons from './data/marathons.json';
-
-// Delete these imports, cant make it work properly
-// import marathonRoutes from './routes/marathon-routes';
-// import userRoutes from './routes/user-routes';
 
 dotenv.config();
 
@@ -30,6 +25,8 @@ app.use(express.json());
 
 const { Schema } = mongoose;
 
+
+// ------------ MARATHON -------------
 const marathonSchema = new Schema({
 	name: String,
 	city: String,
@@ -37,12 +34,13 @@ const marathonSchema = new Schema({
 	lon: Number,
 	country: String,
 	website: String,
-	image: String,
-	unsplashLink: String,
+	image: String
 });
 
 const Marathon = mongoose.model('Marathon', marathonSchema);
 
+
+// ------------ MARATHON -------------
 const userSchema = new Schema({
 	username: {
 		type: String,
@@ -74,13 +72,13 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-if (process.env.RESET_DB) {
-	console.log('Resetting database');
-	const seedDatabase = async () => {
-		await User.deleteMany();
-	};
-	seedDatabase();
-}
+// if (process.env.RESET_DB) {
+// 	console.log('Resetting database');
+// 	const seedDatabase = async () => {
+// 		await Marathon.deleteMany();
+// 	};
+// 	seedDatabase();
+// }
 
 app.use((req, res, next) => {
 	if (mongoose.connection.readyState === 1) {
@@ -94,10 +92,6 @@ app.get('/', (req, res) => {
 	res.send(listEndpoints(app));
 });
 
-//Testar process.env
-// app.get('/secret', (req, res) => {
-// 	res.send(process.env.SECRET_KEY);
-// });
 
 // Gets the races from internal json file
 app.get('/marathonsfromfile', (req, res) => {
@@ -267,6 +261,7 @@ app.get('/users/:userId/marathons', async (req, res) => {
 	}
 });
 
+// --------- Add marathons to a user
 app.patch('/users/:userId/addMarathon', async (req, res) => {
 	const { userId } = req.params;
 	const { marathonToAdd } = req.body;
@@ -294,6 +289,7 @@ app.patch('/users/:userId/addMarathon', async (req, res) => {
 	}
 });
 
+// --------- Delete marathons from a user
 app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	const { userId } = req.params;
 	const { marathonToDelete } = req.body;
@@ -323,6 +319,7 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	}
 });
 
+// ----------- Delete user account
 app.delete('/users/:userId', authenticateUser);
 app.delete('/users/:userId', async (req, res) => {
 	const { userId } = req.params;
