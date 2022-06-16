@@ -7,6 +7,7 @@ import Button from './Button';
 import Loader from './Loader';
 
 import ui from '../reducers/ui';
+import user from '../reducers/user';
 
 const CardContainer = styled.section`
 	display: grid;
@@ -15,29 +16,31 @@ const CardContainer = styled.section`
 `;
 
 const BucketList = () => {
-	const [marathons, setMarathons] = useState([]);
+	const [bucketMarathons, setBucketMarathons] = useState([]);
 
-	const username = useSelector((store) => store.user.username);
-
-	const completedMarathons = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
-	const accessToken = useSelector((store) => store.user.accessToken);
+	// const accessToken = useSelector((store) => store.user.accessToken);
 
 	const isLoading = useSelector((store) => store.ui.isLoading);
+	const testing = useSelector((store) => store.user.marathons);
+
 	const dispatch = useDispatch();
 
-	const getMarathons = () => {
+	const getBucketList = () => {
 		dispatch(ui.actions.setLoading(true));
 
-		fetch(API_URL('marathons'))
+		fetch(API_URL(`users/${userId}/marathons`))
 			.then((res) => res.json())
-			.then((data) => setMarathons(data))
+			.then((data) => {
+				console.log(data.response.marathons);
+				setBucketMarathons(data.response.marathons);
+			})
 			.catch((error) => console.error(error))
 			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	useEffect(() => {
-		getMarathons();
+		getBucketList();
 	}, []);
 
 	return (
@@ -45,22 +48,11 @@ const BucketList = () => {
 			{isLoading ? (
 				<Loader />
 			) : (
-				<>
-					{<p>{username}, this is your bucket list</p>}
-					<CardContainer>
-						{marathons.map((marathon) => (
-							<MarathonCard
-								key={marathon._id}
-								id={marathon._id}
-								name={marathon.name}
-								city={marathon.city}
-								country={marathon.country}
-								url={marathon.website}
-								image={marathon.image}
-							/>
-						))}
-					</CardContainer>
-				</>
+				<CardContainer>
+					{bucketMarathons.map((marathon) => (
+						<li key={marathon}>{marathon}</li>
+					))}
+				</CardContainer>
 			)}
 		</>
 	);

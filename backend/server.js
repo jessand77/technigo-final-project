@@ -25,7 +25,6 @@ app.use(express.json());
 
 const { Schema } = mongoose;
 
-
 // ------------ MARATHON -------------
 const marathonSchema = new Schema({
 	name: String,
@@ -34,11 +33,10 @@ const marathonSchema = new Schema({
 	lon: Number,
 	country: String,
 	website: String,
-	image: String
+	image: String,
 });
 
 const Marathon = mongoose.model('Marathon', marathonSchema);
-
 
 // ------------ MARATHON -------------
 const userSchema = new Schema({
@@ -91,7 +89,6 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
 	res.send(listEndpoints(app));
 });
-
 
 // Gets the races from internal json file
 app.get('/marathonsfromfile', (req, res) => {
