@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RiRunLine } from 'react-icons/ri';
 
 import Header from 'components/Header';
 import Button from 'components/Button';
@@ -24,7 +25,7 @@ const TextBox = styled.div`
 	color: black;
 	font-size: 30px;
 	h1 {
-		margin: 15px;
+		margin: 10px 10px 0 10px;
 	}
 	display: flex;
 	flex-direction: column;
@@ -44,14 +45,15 @@ const StartPage = () => {
 	let buttonText;
 	hasAccessToken
 		? (buttonText = 'To user page')
-		: (buttonText = 'Login or register');
+		: (buttonText = 'Sign up or log in');
 
 	return (
 		<>
 			<Header />
 			<StartPageSection>
 				<TextBox>
-					<h1>Start page</h1>
+					<h1>Welcome runner!</h1>
+					<RiRunLine />
 					<Button handleClick={handleClick} text={buttonText}></Button>
 				</TextBox>
 			</StartPageSection>

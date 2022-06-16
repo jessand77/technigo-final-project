@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import styled from 'styled-components';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import StartPage from './pages/StartPage';
 import LoginOrRegister from 'pages/LoginOrRegister';

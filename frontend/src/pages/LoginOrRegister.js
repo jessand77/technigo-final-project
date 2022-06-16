@@ -82,7 +82,7 @@ const LoginOrRegister = () => {
 	return (
 		<>
 			<Header />
-			<h1>{mode === 'register' ? 'Register' : 'Login'}</h1>
+			<h1>{mode === 'register' ? 'Sign up' : 'Login'}</h1>
 			<Form onSubmit={onFormSubmit}>
 				<label htmlFor="username">Username</label>
 				<input
@@ -107,7 +107,11 @@ const LoginOrRegister = () => {
 			</Form>
 			<Loader />
 			{validationError && <p>{validationError}</p>}
-			{mode === 'register' ? <p>Already have an account?</p> : <p>No account yet?</p>}
+			{mode === 'register' ? (
+				<p>Already have an account?</p>
+			) : (
+				<p>No account yet?</p>
+			)}
 			<Button
 				text={mode === 'register' ? 'Log in' : 'Sign up'}
 				handleClick={toggleMode}

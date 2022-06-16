@@ -14,7 +14,7 @@ const CardContainer = styled.section`
 	gap: 10px;
 `;
 
-const MarathonList = () => {
+const BucketList = () => {
 	const [marathons, setMarathons] = useState([]);
 
 	const completedMarathons = useSelector((store) => store.user.marathons);
