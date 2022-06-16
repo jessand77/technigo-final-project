@@ -17,6 +17,9 @@ const CardContainer = styled.section`
 const MarathonList = () => {
 	const [marathons, setMarathons] = useState([]);
 
+	const username = useSelector((store) => store.user.username);
+
+	// Do I need these here?
 	const completedMarathons = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -44,6 +47,7 @@ const MarathonList = () => {
 				<Loader />
 			) : (
 				<>
+					<p>{username}, add marathons your bucket list</p>
 					<CardContainer>
 						{marathons.map((marathon) => (
 							<MarathonCard

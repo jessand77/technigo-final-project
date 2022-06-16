@@ -17,6 +17,8 @@ const CardContainer = styled.section`
 const BucketList = () => {
 	const [marathons, setMarathons] = useState([]);
 
+	const username = useSelector((store) => store.user.username);
+
 	const completedMarathons = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -44,6 +46,7 @@ const BucketList = () => {
 				<Loader />
 			) : (
 				<>
+					{<p>{username}, this is your bucket list</p>}
 					<CardContainer>
 						{marathons.map((marathon) => (
 							<MarathonCard
@@ -63,4 +66,4 @@ const BucketList = () => {
 	);
 };
 
-export default MarathonList;
+export default BucketList;

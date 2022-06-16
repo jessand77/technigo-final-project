@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Header from 'components/Header';
 import UserPageHeader from 'components/UserPageHeader';
 import MarathonList from 'components/MarathonList';
+import BucketList from 'components/BucketList';
+import Button from 'components/Button';
 
 const UserPageSection = styled.section`
 	background-color: lavender;
@@ -15,10 +17,15 @@ const UserPageSection = styled.section`
 `;
 
 const UserPage = () => {
+	const [list, setList] = useState('all');
 	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const username = useSelector((store) => store.user.username);
 
 	const userMarathons = useSelector((store) => store.user.marathons);
+
+	const toggleList = () => {
+		setList(list === 'all' ? 'bucket' : 'all');
+	};
 
 	if (!hasAccessToken) {
 		return (
@@ -29,6 +36,9 @@ const UserPage = () => {
 		);
 	}
 
+	let buttonText;
+	list === 'all' ? (buttonText = 'Bucket list') : (buttonText = 'All races');
+
 	return (
 		<>
 			<UserPageHeader />
@@ -36,8 +46,8 @@ const UserPage = () => {
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
-				<p>Add some marathons to your bucket list</p>
-				<MarathonList />
+				<Button handleClick={toggleList} text={buttonText}></Button>
+				{list === 'all' ? <MarathonList /> : <BucketList />}
 			</UserPageSection>
 		</>
 	);
