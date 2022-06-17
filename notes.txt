@@ -4,3 +4,19 @@ Todo
 
 # Fix function to show info about separate marathon in own component and fetch data from backend
 
+# Make it impossible to add same marathon more than once
+
+
+## Så här såg det ut innan jag ändrade fredag kväll
+"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}

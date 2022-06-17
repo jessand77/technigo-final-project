@@ -33,12 +33,17 @@ const EndPage = () => {
 		navigate('/');
 	};
 
+	const handleAnotherClick = () => {
+		navigate('/map');
+	};
+
 	return (
 		<>
 			<StartPageSection>
 				<TextBox>
 					<p>Take me back to the start page</p>
 					<Button text="OK" handleClick={handleClick}></Button>
+					<Button text="OK" handleClick={handleAnotherClick}></Button>
 				</TextBox>
 			</StartPageSection>
 		</>

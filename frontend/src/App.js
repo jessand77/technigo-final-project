@@ -10,6 +10,7 @@ import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
 import EndPage from 'pages/EndPage';
 import NotFound from './pages/NotFound';
+import MapPage from 'pages/MapPage';
 
 import user from 'reducers/user';
 import ui from 'reducers/ui';
@@ -44,6 +45,7 @@ export const App = () => {
 							<Route path="/login" element={<LoginOrRegister />}></Route>
 							<Route path="/userpage" element={<UserPage />}></Route>
 							<Route path="/loggedout" element={<EndPage />}></Route>
+							<Route path="/map" element={<MapPage />}></Route>
 							<Route path="*" element={<NotFound />}></Route>
 						</Routes>
 					</BrowserRouter>
