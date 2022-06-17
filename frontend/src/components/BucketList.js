@@ -50,7 +50,15 @@ const BucketList = () => {
 			) : (
 				<CardContainer>
 					{bucketMarathons.map((marathon) => (
-						<li key={marathon}>{marathon}</li>
+						<MarathonCard
+							key={marathon._id}
+							id={marathon._id}
+							name={marathon.name}
+							city={marathon.city}
+							country={marathon.country}
+							url={marathon.website}
+							image={marathon.image}
+						/>
 					))}
 				</CardContainer>
 			)}

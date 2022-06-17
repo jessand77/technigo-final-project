@@ -22,7 +22,7 @@ const MarathonList = () => {
 	// Do I need these here?
 	const completedMarathons = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
-	const accessToken = useSelector((store) => store.user.accessToken);
+	// const accessToken = useSelector((store) => store.user.accessToken);
 
 	const isLoading = useSelector((store) => store.ui.isLoading);
 	const dispatch = useDispatch();

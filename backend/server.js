@@ -235,7 +235,7 @@ app.get('/users/:userId/marathons', async (req, res) => {
 	const { userId } = req.params;
 	try {
 		if (userId) {
-			const user = await User.findById(userId);
+			const user = await User.findById(userId).populate('marathons');
 
 			res.status(200).json({
 				success: true,

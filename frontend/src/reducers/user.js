@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { API_URL } from 'utils/urls';
-
 const initialState = {
 	userId: null,
 	username: null,
@@ -29,7 +27,7 @@ const user = createSlice({
 		setError: (store, action) => {
 			store.error = action.payload;
 		},
-		
+
 		// addMarathon: (store, action) => {
 		// 	store.marathons.push(action.payload);
 		// },
@@ -41,6 +39,5 @@ const user = createSlice({
 		// },
 	},
 });
-
 
 export default user;

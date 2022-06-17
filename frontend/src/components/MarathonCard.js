@@ -32,9 +32,10 @@ const MarathonCard = (props) => {
 	const { id, name, city, country, url, image } = props;
 
 	const usersList = useSelector((store) => store.user.marathons);
-	let isInUsersList = useSelector((store) => store.user.marathons).includes(
-		id
-	)
+
+	const isMarathonInUsersList = usersList.some(
+		(marathon) => marathon._id === id
+	);
 
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -105,7 +106,7 @@ const MarathonCard = (props) => {
 				<h2>{name}</h2>
 				{/* <label htmlFor="run">Add to my list</label>
 				<input type="checkbox" id="run" /> */}
-				{!isInUsersList ? (
+				{!isMarathonInUsersList ? (
 					<button onClick={addMarathon}>Add race</button>
 				) : (
 					<button onClick={deleteMarathon}>Delete race</button>
