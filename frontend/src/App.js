@@ -4,13 +4,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import styled from 'styled-components';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+import env from 'react-dotenv';
 
 import StartPage from './pages/StartPage';
 import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
 import EndPage from 'pages/EndPage';
 import NotFound from './pages/NotFound';
-import MapPage from 'pages/MapPage';
+import Map from './components/Map';
+
+import API_KEY from './secret';
 
 import user from 'reducers/user';
 import ui from 'reducers/ui';
@@ -45,7 +50,7 @@ export const App = () => {
 							<Route path="/login" element={<LoginOrRegister />}></Route>
 							<Route path="/userpage" element={<UserPage />}></Route>
 							<Route path="/loggedout" element={<EndPage />}></Route>
-							<Route path="/map" element={<MapPage />}></Route>
+							<Route path="/map" element={<Map />}></Route>
 							<Route path="*" element={<NotFound />}></Route>
 						</Routes>
 					</BrowserRouter>

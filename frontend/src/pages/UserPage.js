@@ -7,6 +7,7 @@ import UserPageHeader from 'components/UserPageHeader';
 import MarathonList from 'components/MarathonList';
 import BucketList from 'components/BucketList';
 import Button from 'components/Button';
+import Map from 'components/Map';
 
 const UserPageSection = styled.section`
 	background-color: lavender;
@@ -42,6 +43,7 @@ const UserPage = () => {
 	return (
 		<>
 			<UserPageHeader />
+			<Map />
 			<UserPageSection>
 				<h1>
 					Hello <span>{username}</span>!

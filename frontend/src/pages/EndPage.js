@@ -43,7 +43,7 @@ const EndPage = () => {
 				<TextBox>
 					<p>Take me back to the start page</p>
 					<Button text="OK" handleClick={handleClick}></Button>
-					<Button text="OK" handleClick={handleAnotherClick}></Button>
+					<Button text="Till kartan" handleClick={handleAnotherClick}></Button>
 				</TextBox>
 			</StartPageSection>
 		</>
