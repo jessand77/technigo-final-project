@@ -7,16 +7,4 @@ Todo
 # Make it impossible to add same marathon more than once
 
 
-## Så här såg det ut innan jag ändrade fredag kväll
-"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+echo -e "const API_KEY = 'testing remote';" > secret.js
