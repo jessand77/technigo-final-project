@@ -15,8 +15,6 @@ import EndPage from 'pages/EndPage';
 import NotFound from './pages/NotFound';
 import Map from './components/Map';
 
-import API_KEY from './secret';
-
 import user from 'reducers/user';
 import ui from 'reducers/ui';
 
