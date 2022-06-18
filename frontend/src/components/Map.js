@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-import MAPBOX_ACCESS_TOKEN from 'secret';
+import MAPBOX_ACCESS_TOKEN from '../secret';
 
 const marathons = [
 	{
