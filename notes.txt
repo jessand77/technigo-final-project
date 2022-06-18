@@ -8,3 +8,13 @@ Todo
 
 
 echo -e "const API_KEY = 'testing remote';" > secret.js
+
+
+
+Innehållet i netlify.toml som jag tog bort tillfälligt
+# This file tells netlify where the code for this project is and
+# how it should build the JavaScript assets to deploy from.
+[build]
+  base = "frontend/"
+  publish = "build/"
+  command = "npm run build"
