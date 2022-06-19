@@ -50,11 +50,11 @@ const LoginOrRegister = () => {
 		fetch(API_URL(mode), options)
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data)
 				if (data.success) {
 					batch(() => {
 						dispatch(user.actions.setUserId(data.userId));
 						dispatch(user.actions.setUsername(data.username));
-						dispatch(user.actions.setAccessToken(data.accessToken));
 						dispatch(user.actions.setAccessToken(data.accessToken));
 						dispatch(user.actions.setMarathons(data.marathons));
 						dispatch(user.actions.setError(null));

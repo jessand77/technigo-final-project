@@ -43,6 +43,10 @@ const Map = () => {
 			zoom: 2.8,
 		});
 
+		const marker1 = new mapboxgl.Marker()
+			.setLngLat([12.554729, 55.70651])
+			.addTo(map);
+
 		map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 		map.on('load', () => {

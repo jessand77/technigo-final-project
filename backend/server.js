@@ -73,7 +73,7 @@ const User = mongoose.model('User', userSchema);
 // if (process.env.RESET_DB) {
 // 	console.log('Resetting database');
 // 	const seedDatabase = async () => {
-// 		await Marathon.deleteMany();
+// 		await User.deleteMany();
 // 	};
 // 	seedDatabase();
 // }

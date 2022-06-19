@@ -11,6 +11,7 @@ import env from 'react-dotenv';
 import StartPage from './pages/StartPage';
 import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
+import DeleteAccount from 'pages/DeleteAccount';
 import EndPage from 'pages/EndPage';
 import NotFound from './pages/NotFound';
 import Map from './components/Map';
@@ -47,6 +48,7 @@ export const App = () => {
 							<Route path="/" element={<StartPage />}></Route>
 							<Route path="/login" element={<LoginOrRegister />}></Route>
 							<Route path="/userpage" element={<UserPage />}></Route>
+							<Route path="/delete-account" element={<DeleteAccount />}></Route>
 							<Route path="/loggedout" element={<EndPage />}></Route>
 							<Route path="/map" element={<Map />}></Route>
 							<Route path="*" element={<NotFound />}></Route>
