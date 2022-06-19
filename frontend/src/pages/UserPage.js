@@ -43,7 +43,7 @@ const UserPage = () => {
 	return (
 		<>
 			<UserPageHeader />
-
+			<Map />
 			<UserPageSection>
 				<h1>
 					Hello <span>{username}</span>!

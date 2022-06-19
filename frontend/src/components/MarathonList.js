@@ -43,9 +43,8 @@ const MarathonList = () => {
 
 	return (
 		<>
-			{isLoading ? (
-				<Loader />
-			) : (
+			<Loader />
+			{!isLoading && (
 				<>
 					<p>{username}, add marathons your bucket list</p>
 					<CardContainer>

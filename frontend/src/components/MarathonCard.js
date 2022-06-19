@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import styled from 'styled-components';
+import Button from './Button';
 
 import { API_URL } from 'utils/urls';
 
 import user from 'reducers/user';
 
 const StyledCard = styled.div`
+	position: relative;
+
 	border: 1px solid black;
-	padding: 10px;
-	background-color: whitesmoke;
 	h2 {
 		font-size: smaller;
 	}
 	img {
-		height: 50px;
-		display: block;
+		width: 100%;
 	}
 	p {
 		font-size: xx-small;
 	}
-	label {
-		font-size: xx-small;
-		font-style: italic;
-		position: relative;
-		bottom: 2px;
+	a {
+		text-decoration: none;
+		color: white;
 	}
+`;
+
+const ImageBox = styled.div`
+	position: relative;
+`;
+
+const ContentBox = styled.div`
+	position: absolute; /* Position the background text */
+	bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+	background: rgb(0, 0, 0); /* Fallback color */
+	background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+	color: #f1f1f1; /* Grey text */
+	width: 100%; /* Full width */
+	padding: 20px; /* Some padding */
 `;
 
 const MarathonCard = (props) => {
@@ -103,20 +115,24 @@ const MarathonCard = (props) => {
 	return (
 		<>
 			<StyledCard>
-				<h2>{name}</h2>
-				{/* <label htmlFor="run">Add to my list</label>
-				<input type="checkbox" id="run" /> */}
+				<ImageBox>
+					<img src={image} alt={city} />
+					<ContentBox>
+						<a href={url} target="_blank">
+							<h2>{name}</h2>
+						</a>
+					</ContentBox>
+				</ImageBox>
+
 				{!isMarathonInUsersList ? (
-					<button onClick={addMarathon}>Add race</button>
+					<Button text="Add race" color="green" onClick={addMarathon}></Button>
 				) : (
-					<button onClick={deleteMarathon}>Delete race</button>
+					<Button
+						text="Delete race"
+						color="red"
+						onClick={deleteMarathon}
+					></Button>
 				)}
-				<p>
-					{city}, {country}
-				</p>
-				<a href={url} target="_blank">
-					<img src={image} />
-				</a>
 			</StyledCard>
 		</>
 	);

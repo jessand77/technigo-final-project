@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import env from 'react-dotenv';
-
 import StartPage from './pages/StartPage';
 import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
@@ -24,7 +22,18 @@ const reducer = combineReducers({
 	ui: ui.reducer,
 });
 
-const store = configureStore({ reducer });
+const persistedStateJSON = localStorage.getItem('state');
+let persistedState = {};
+
+if (persistedStateJSON) {
+	persistedState = JSON.parse(persistedStateJSON);
+}
+
+const store = configureStore({ reducer, preloadedState: persistedState });
+
+store.subscribe(() => {
+	localStorage.setItem('state', JSON.stringify(store.getState()));
+});
 
 const OuterWrapper = styled.div`
 	width: 100%;
@@ -34,8 +43,14 @@ const OuterWrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
-	width: 70%;
+	width: 100%;
 	margin: 0 auto;
+	@media (min-width: 767px) {
+		width: 80%;
+	}
+	@media (min-width: 992px) {
+		width: 65%;
+	}
 `;
 
 export const App = () => {

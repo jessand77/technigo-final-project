@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './Button';
+import Logo from './Logo';
 
 import user from '../reducers/user';
 
@@ -27,13 +28,13 @@ const UserPageHeader = () => {
 	};
 
 	const handleDeleteAccount = () => {
-		navigate('/delete-account')
+		navigate('/delete-account');
 	};
 
 	return (
 		<StyledHeader>
 			<Link to="/">
-				<Button text="Home"></Button>
+				<Logo />
 			</Link>
 			<Button text="Delete user" handleClick={handleDeleteAccount}></Button>
 			<Button text="Logout" handleClick={handleLogout}></Button>

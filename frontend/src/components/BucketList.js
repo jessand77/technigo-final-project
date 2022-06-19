@@ -19,10 +19,7 @@ const BucketList = () => {
 	const [bucketMarathons, setBucketMarathons] = useState([]);
 
 	const userId = useSelector((store) => store.user.userId);
-	// const accessToken = useSelector((store) => store.user.accessToken);
-
 	const isLoading = useSelector((store) => store.ui.isLoading);
-	const testing = useSelector((store) => store.user.marathons);
 
 	const dispatch = useDispatch();
 
@@ -45,9 +42,8 @@ const BucketList = () => {
 
 	return (
 		<>
-			{isLoading ? (
-				<Loader />
-			) : (
+			{isLoading && <Loader />}
+			{!isLoading && (
 				<CardContainer>
 					{bucketMarathons.map((marathon) => (
 						<MarathonCard
@@ -64,6 +60,28 @@ const BucketList = () => {
 			)}
 		</>
 	);
+
+	// return (
+	// 	<>
+	// 		{isLoading ? (
+	// 			<Loader />
+	// 		) : (
+	// 			<CardContainer>
+	// 				{bucketMarathons.map((marathon) => (
+	// 					<MarathonCard
+	// 						key={marathon._id}
+	// 						id={marathon._id}
+	// 						name={marathon.name}
+	// 						city={marathon.city}
+	// 						country={marathon.country}
+	// 						url={marathon.website}
+	// 						image={marathon.image}
+	// 					/>
+	// 				))}
+	// 			</CardContainer>
+	// 		)}
+	// 	</>
+	// );
 };
 
 export default BucketList;

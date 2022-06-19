@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Logo from './Logo';
 import Button from './Button';
 
 const StyledHeader = styled.header`
@@ -9,6 +10,9 @@ const StyledHeader = styled.header`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	a {
+		text-decoration: none;
+	}
 `;
 
 const Header = () => {
@@ -16,7 +20,7 @@ const Header = () => {
 		<StyledHeader>
 			<p>
 				<Link to="/">
-					<Button text="Home" />
+					<Logo />
 				</Link>
 			</p>
 		</StyledHeader>

@@ -1,16 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { RiRunLine } from 'react-icons/ri';
 
 import Header from 'components/Header';
 import Button from 'components/Button';
 
 import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
+import runners from '../assets/runners.jpg';
 
 const StartPageSection = styled.section`
-	background-image: url(${sthlmMarathon});
+	background-image: url(${runners});
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

@@ -1,13 +1,24 @@
-body {
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+}
+
+body {
   font-family: 'Poppins', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} */
+
+.inner-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
 
 #mapid {
