@@ -29,7 +29,7 @@ const marathons = [
 ];
 
 mapboxgl.accessToken =
-	'pk.eyJ1IjoiamVzc2FuZDc3IiwiYSI6ImNsNGt4YWxjbTEzMXMzanBmcTg4MGlvczUifQ.K5zX2b316PLhPBVkTXZg1A';
+	'pk.eyJ1IjoiamVzc2FuZDc3IiwiYSI6ImNsNGlnajc5MzBjNHEzY3ViYTJldmpqZzMifQ.kScEQKVYUppuo1Ghyc0wlA';
 
 const Map = () => {
 	const mapContainerRef = useRef(null);
