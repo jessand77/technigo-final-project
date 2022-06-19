@@ -18,3 +18,17 @@ Innehållet i netlify.toml som jag tog bort tillfälligt
   base = "frontend/"
   publish = "build/"
   command = "npm run build"
+
+
+  "browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
