@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-import MAPBOX_ACCESS_TOKEN from '../secret.js';
-
 const marathons = [
 	{
 		type: 'Feature',
@@ -30,7 +28,8 @@ const marathons = [
 	},
 ];
 
-mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken =
+	'pk.eyJ1IjoiamVzc2FuZDc3IiwiYSI6ImNsNGt4YWxjbTEzMXMzanBmcTg4MGlvczUifQ.K5zX2b316PLhPBVkTXZg1A';
 
 const Map = () => {
 	const mapContainerRef = useRef(null);
