@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
+import moment from 'moment';
 
 import Header from 'components/Header';
 import UserPageHeader from 'components/UserPageHeader';
@@ -49,7 +50,9 @@ const UserPage = () => {
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
-				<p>User since {userSince}</p>
+				<p>
+					User since {moment(userSince).format('MMMM Do YYYY')}
+				</p>
 				<Button handleClick={toggleList} text={buttonText}></Button>
 				{list === 'all' ? <MarathonList /> : <BucketList />}
 			</UserPageSection>

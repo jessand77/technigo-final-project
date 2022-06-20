@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import Button from 'components/Button';
 import { API_URL } from 'utils/urls';
 
 import user from '../reducers/user';
+import ui from '../reducers/ui';
 
 const DeleteAccount = () => {
 	const [deleteSuccess, setDeleteSuccess] = useState(true);
@@ -19,7 +21,7 @@ const DeleteAccount = () => {
 	// console.log(accessToken);
 
 	const handleYes = () => {
-		console.log(API_URL(`users/${userId}`));
+		// console.log(API_URL(`users/${userId}`));
 		const options = {
 			method: 'DELETE',
 			headers: {
@@ -27,8 +29,7 @@ const DeleteAccount = () => {
 				Authorization: accessToken,
 			},
 		};
-
-		// console.log(options);
+		dispatch(ui.actions.setLoading(true));
 
 		fetch(API_URL(`users/${userId}`), options)
 			.then((res) => res.json())
@@ -36,7 +37,12 @@ const DeleteAccount = () => {
 				console.log(data);
 
 				if (data.success) {
-					alert('Taking you back to start page');
+					swal({
+						title: 'Account deleted!',
+						text: 'Taking you back to start page',
+						icon: 'success',
+						button: 'Ok',
+					});
 					navigate('/');
 					batch(() => {
 						dispatch(user.actions.setUserId(null));
@@ -49,7 +55,9 @@ const DeleteAccount = () => {
 					console.log(data.response);
 					setDeleteSuccess(false);
 				}
-			});
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	const handleNo = () => {

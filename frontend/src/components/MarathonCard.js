@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import Button from './Button';
 import { API_URL } from 'utils/urls';
 
 import user from 'reducers/user';
+import ui from '../reducers/ui';
 
 const StyledCard = styled.div`
 	position: relative;
@@ -53,14 +55,17 @@ const MarathonCard = ({ id, name, city, country, url, image }) => {
 	const usersList = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
-
+	const isLoading = useSelector((store) => store.ui.isLoading);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const isMarathonInUsersList = usersList.some(
 		(marathon) => marathon._id === id
 	);
 
 	const updateMarathonArray = () => {
+		dispatch(ui.actions.setLoading(true));
+
 		fetch(API_URL(`users/${userId}/marathons`))
 			.then((res) => res.json())
 			.then((data) => {
@@ -75,7 +80,9 @@ const MarathonCard = ({ id, name, city, country, url, image }) => {
 						dispatch(user.actions.setError(data.response));
 					});
 				}
-			});
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	const addMarathon = () => {
@@ -90,12 +97,16 @@ const MarathonCard = ({ id, name, city, country, url, image }) => {
 			body: JSON.stringify({ marathonToAdd }),
 		};
 
+		dispatch(ui.actions.setLoading(true));
+
 		fetch(API_URL(`users/${userId}/addMarathon`), options)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.response);
+				// console.log(data.response);
 				updateMarathonArray();
-			});
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	const deleteMarathon = () => {
@@ -110,38 +121,52 @@ const MarathonCard = ({ id, name, city, country, url, image }) => {
 			body: JSON.stringify({ marathonToDelete }),
 		};
 
+		dispatch(ui.actions.setLoading(true));
+
 		fetch(API_URL(`users/${userId}/deleteMarathon`), options)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data.response);
 				updateMarathonArray();
-			});
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
+
+	const moreInfo = () => {
+		alert('Inget händer här');
 	};
 
 	return (
-		<>
-			<StyledCard>
-				<ImageBox>
-					<img src={image} alt={city} />
-					<TextBox>
-						<a href={url} target="_blank">
-							<h2>{name}</h2>
-						</a>
-					</TextBox>
-				</ImageBox>
-
-				{!isMarathonInUsersList ? (
-					<Button text="Add race" color="green" onClick={addMarathon}></Button>
-				) : (
-					<Button
-						text="Delete race"
-						color="red"
-						onClick={deleteMarathon}
-					></Button>
-				)}
-				<Button text="More info"></Button>
-			</StyledCard>
-		</>
+		<StyledCard>
+			<ImageBox>
+				<img src={image} alt={city} />
+				<TextBox>
+					<a href={url} target="_blank">
+						<h2>{name}</h2>
+					</a>
+					<Link to={`/marathon/${id}`}>
+						<p>Read more</p>
+					</Link>
+				</TextBox>
+			</ImageBox>
+			{!isMarathonInUsersList ? (
+				<Button
+					disable={isLoading}
+					text="Add race"
+					color="green"
+					handleClick={addMarathon}
+				></Button>
+			) : (
+				<Button
+					disable={isLoading}
+					text="Delete race"
+					color="red"
+					handleClick={deleteMarathon}
+				></Button>
+			)}
+			<Button text="More info" handleClick={moreInfo}></Button>
+		</StyledCard>
 	);
 };
 

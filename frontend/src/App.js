@@ -9,6 +9,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import StartPage from './pages/StartPage';
 import LoginOrRegister from 'pages/LoginOrRegister';
 import UserPage from './pages/UserPage';
+import MarathonPage from './pages/MarathonPage';
 import DeleteAccount from 'pages/DeleteAccount';
 import EndPage from 'pages/EndPage';
 import NotFound from './pages/NotFound';
@@ -63,6 +64,10 @@ export const App = () => {
 							<Route path="/" exact element={<StartPage />}></Route>
 							<Route path="/login" element={<LoginOrRegister />}></Route>
 							<Route path="/userpage" element={<UserPage />}></Route>
+							<Route
+								path="/marathon/:id"
+								element={<MarathonPage />}
+							></Route>
 							<Route path="/delete-account" element={<DeleteAccount />}></Route>
 							<Route path="/loggedout" element={<EndPage />}></Route>
 							<Route path="/map" element={<Map />}></Route>

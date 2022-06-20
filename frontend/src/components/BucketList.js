@@ -43,8 +43,9 @@ const BucketList = () => {
 
 	return (
 		<>
-			{isLoading && <Loader />}
-			{!isLoading && (
+			{isLoading ? (
+				<Loader />
+			) : (
 				<CardContainer>
 					{bucketMarathons.map((marathon) => (
 						<MarathonCard
@@ -61,28 +62,6 @@ const BucketList = () => {
 			)}
 		</>
 	);
-
-	// return (
-	// 	<>
-	// 		{isLoading ? (
-	// 			<Loader />
-	// 		) : (
-	// 			<CardContainer>
-	// 				{bucketMarathons.map((marathon) => (
-	// 					<MarathonCard
-	// 						key={marathon._id}
-	// 						id={marathon._id}
-	// 						name={marathon.name}
-	// 						city={marathon.city}
-	// 						country={marathon.country}
-	// 						url={marathon.website}
-	// 						image={marathon.image}
-	// 					/>
-	// 				))}
-	// 			</CardContainer>
-	// 		)}
-	// 	</>
-	// );
 };
 
 export default BucketList;

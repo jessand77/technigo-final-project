@@ -9,6 +9,7 @@ import Header from 'components/Header';
 import Button from 'components/Button';
 
 import user from '../reducers/user';
+import ui from '../reducers/ui';
 
 const Form = styled.form`
 	display: flex;
@@ -46,6 +47,7 @@ const LoginOrRegister = () => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username, password }),
 		};
+		dispatch(ui.actions.setLoading(true));
 
 		fetch(API_URL(mode), options)
 			.then((res) => res.json())
@@ -70,7 +72,9 @@ const LoginOrRegister = () => {
 						dispatch(user.actions.setError(data.message));
 					});
 				}
-			});
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	const toggleMode = () => {
