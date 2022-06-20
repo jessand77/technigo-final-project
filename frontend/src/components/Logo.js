@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { RiRunLine } from 'react-icons/ri';
 
 const LogoContainer = styled.div`

@@ -7,7 +7,7 @@ import crypto from 'crypto';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
-import marathons from './data/marathons.json';
+// import marathons from './data/marathons.json';
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ app.use(express.json());
 
 const { Schema } = mongoose;
 
-// ------------ MARATHON -------------
+// ------------ MARATHON SCHEMA AND MODEL -------------
 const marathonSchema = new Schema({
 	name: String,
 	city: String,
@@ -38,7 +38,7 @@ const marathonSchema = new Schema({
 
 const Marathon = mongoose.model('Marathon', marathonSchema);
 
-// ------------ MARATHON -------------
+// ------------ USER SCHEMA AND MODEL -------------
 const userSchema = new Schema({
 	username: {
 		type: String,
@@ -91,11 +91,11 @@ app.get('/', (req, res) => {
 });
 
 // Gets the races from internal json file
-app.get('/marathonsfromfile', (req, res) => {
-	res.status(200).json({
-		marathons: marathons,
-	});
-});
+// app.get('/marathonsfromfile', (req, res) => {
+// 	res.status(200).json({
+// 		marathons: marathons,
+// 	});
+// });
 
 // Gets the races from MongoDB
 app.get('/marathons', async (req, res) => {
@@ -148,6 +148,7 @@ app.post('/register', async (req, res) => {
 			userId: newUser._id,
 			username: newUser.username,
 			accessToken: newUser.accessToken,
+			userSince: newUser.createdAt,
 			marathons: newUser.marathons,
 		});
 	} catch (error) {

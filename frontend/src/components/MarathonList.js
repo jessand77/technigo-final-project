@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
+
 import { API_URL } from '../utils/urls';
 import MarathonCard from './MarathonCard';
-import Button from './Button';
 import Loader from './Loader';
 
 import ui from '../reducers/ui';
@@ -18,11 +18,6 @@ const MarathonList = () => {
 	const [marathons, setMarathons] = useState([]);
 
 	const username = useSelector((store) => store.user.username);
-
-	// Do I need these here?
-	const completedMarathons = useSelector((store) => store.user.marathons);
-	const userId = useSelector((store) => store.user.userId);
-	// const accessToken = useSelector((store) => store.user.accessToken);
 
 	const isLoading = useSelector((store) => store.ui.isLoading);
 	const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import Header from 'components/Header';
 import UserPageHeader from 'components/UserPageHeader';
@@ -10,7 +10,7 @@ import Button from 'components/Button';
 import Map from 'components/Map';
 
 const UserPageSection = styled.section`
-	background-color: lavender;
+	background-color: whitesmoke;
 	padding: 10px;
 	span {
 		color: green;
@@ -21,6 +21,7 @@ const UserPage = () => {
 	const [list, setList] = useState('all');
 	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const username = useSelector((store) => store.user.username);
+	const userSince = useSelector((store) => store.user.userSince);
 
 	const userMarathons = useSelector((store) => store.user.marathons);
 
@@ -48,6 +49,7 @@ const UserPage = () => {
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
+				<p>User since {userSince}</p>
 				<Button handleClick={toggleList} text={buttonText}></Button>
 				{list === 'all' ? <MarathonList /> : <BucketList />}
 			</UserPageSection>

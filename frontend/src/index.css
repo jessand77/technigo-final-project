@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Poppins', serif;
+  background-color: ghostwhite;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

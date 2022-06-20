@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Button from 'components/Button';
 
+import Button from 'components/Button';
 import { API_URL } from 'utils/urls';
 
 import user from '../reducers/user';
@@ -15,8 +15,8 @@ const DeleteAccount = () => {
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
 
-	console.log(userId);
-	console.log(accessToken);
+	// console.log(userId);
+	// console.log(accessToken);
 
 	const handleYes = () => {
 		console.log(API_URL(`users/${userId}`));
@@ -28,7 +28,7 @@ const DeleteAccount = () => {
 			},
 		};
 
-		console.log(options);
+		// console.log(options);
 
 		fetch(API_URL(`users/${userId}`), options)
 			.then((res) => res.json())

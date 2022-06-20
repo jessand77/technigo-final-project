@@ -6,7 +6,6 @@ import { RiRunLine } from 'react-icons/ri';
 
 import Header from 'components/Header';
 import Button from 'components/Button';
-
 import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
 import runners from '../assets/runners.jpg';
 

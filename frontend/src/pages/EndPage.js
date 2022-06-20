@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Button from 'components/Button';
+import styled from 'styled-components/macro';
 
+import Button from 'components/Button';
 import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
 
 const StartPageSection = styled.section`

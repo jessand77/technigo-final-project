@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -60,7 +60,7 @@ export const App = () => {
 				<Provider store={store}>
 					<BrowserRouter>
 						<Routes>
-							<Route path="/" element={<StartPage />}></Route>
+							<Route path="/" exact element={<StartPage />}></Route>
 							<Route path="/login" element={<LoginOrRegister />}></Route>
 							<Route path="/userpage" element={<UserPage />}></Route>
 							<Route path="/delete-account" element={<DeleteAccount />}></Route>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
+
 import { API_URL } from '../utils/urls';
 import MarathonCard from './MarathonCard';
 import Button from './Button';
@@ -29,7 +30,7 @@ const BucketList = () => {
 		fetch(API_URL(`users/${userId}/marathons`))
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.response.marathons);
+				// console.log(data.response.marathons);
 				setBucketMarathons(data.response.marathons);
 			})
 			.catch((error) => console.error(error))

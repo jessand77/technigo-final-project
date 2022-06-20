@@ -4,6 +4,7 @@ const initialState = {
 	userId: null,
 	username: null,
 	accessToken: null,
+	userSince: null,
 	marathons: [],
 	error: null,
 };
@@ -21,22 +22,15 @@ const user = createSlice({
 		setAccessToken: (store, action) => {
 			store.accessToken = action.payload;
 		},
+		setUserSince: (store, action) => {
+			store.userSince = action.payload;
+		},
 		setMarathons: (store, action) => {
 			store.marathons = action.payload;
 		},
 		setError: (store, action) => {
 			store.error = action.payload;
 		},
-
-		// addMarathon: (store, action) => {
-		// 	store.marathons.push(action.payload);
-		// },
-		// deleteMarathon: (store, action) => {
-		// 	store.marathons.splice(action.payload, 1);
-		// },
-		// removeAllMarathons: (store, action) => {
-		// 	store.marathons = [];
-		// },
 	},
 });
 

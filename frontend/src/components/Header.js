@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
+
 import Logo from './Logo';
-import Button from './Button';
 
 const StyledHeader = styled.header`
 	background-color: #adebad;
@@ -18,11 +18,9 @@ const StyledHeader = styled.header`
 const Header = () => {
 	return (
 		<StyledHeader>
-			<p>
 				<Link to="/">
 					<Logo />
 				</Link>
-			</p>
 		</StyledHeader>
 	);
 };
