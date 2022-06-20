@@ -17,11 +17,14 @@ const DeleteAccount = () => {
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
 
-	// console.log(userId);
-	// console.log(accessToken);
-
 	const handleYes = () => {
-		// console.log(API_URL(`users/${userId}`));
+		
+		// Make this work!
+		swal('Are you sure?', {
+			dangerMode: true,
+			buttons: true,
+		});
+
 		const options = {
 			method: 'DELETE',
 			headers: {

@@ -8,11 +8,11 @@ import UserPageHeader from 'components/UserPageHeader';
 import MarathonList from 'components/MarathonList';
 import BucketList from 'components/BucketList';
 import Button from 'components/Button';
-import Map from 'components/Map';
 
 const UserPageSection = styled.section`
 	background-color: whitesmoke;
-	padding: 10px;
+	padding: 20px;
+	text-align: center;
 	span {
 		color: green;
 	}
@@ -45,14 +45,11 @@ const UserPage = () => {
 	return (
 		<>
 			<UserPageHeader />
-			<Map />
 			<UserPageSection>
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
-				<p>
-					User since {moment(userSince).format('MMMM Do YYYY')}
-				</p>
+				<p>User since {moment(userSince).format('MMMM Do YYYY')}</p>
 				<Button handleClick={toggleList} text={buttonText}></Button>
 				{list === 'all' ? <MarathonList /> : <BucketList />}
 			</UserPageSection>

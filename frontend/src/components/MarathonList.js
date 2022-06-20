@@ -52,6 +52,7 @@ const MarathonList = () => {
 								country={marathon.country}
 								url={marathon.website}
 								image={marathon.image}
+								mode="all"
 							/>
 						))}
 					</CardContainer>

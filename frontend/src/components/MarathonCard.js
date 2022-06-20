@@ -12,7 +12,6 @@ import ui from '../reducers/ui';
 const StyledCard = styled.div`
 	position: relative;
 	text-align: center;
-	/* border: 1px solid black; */
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	// Funkar inte?
 	/* transition: 0.3s;
@@ -20,7 +19,7 @@ const StyledCard = styled.div`
 		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 	} */
 	h2 {
-		font-size: medium;
+		font-size: larger;
 	}
 	img {
 		width: 100%;
@@ -51,7 +50,7 @@ const TextBox = styled.div`
 	padding: 20px; /* Some padding */
 `;
 
-const MarathonCard = ({ id, name, city, country, url, image }) => {
+const MarathonCard = ({ id, name, city, url, image, mode }) => {
 	const usersList = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -135,38 +134,40 @@ const MarathonCard = ({ id, name, city, country, url, image }) => {
 
 	const moreInfo = () => {
 		alert('Inget händer här');
+		console.log(mode);
 	};
 
 	return (
-		<StyledCard>
-			<ImageBox>
-				<img src={image} alt={city} />
-				<TextBox>
-					<a href={url} target="_blank">
-						<h2>{name}</h2>
-					</a>
-					<Link to={`/marathon/${id}`}>
-						<p>Read more</p>
-					</Link>
-				</TextBox>
-			</ImageBox>
-			{!isMarathonInUsersList ? (
-				<Button
-					disable={isLoading}
-					text="Add race"
-					color="green"
-					handleClick={addMarathon}
-				></Button>
-			) : (
-				<Button
-					disable={isLoading}
-					text="Delete race"
-					color="red"
-					handleClick={deleteMarathon}
-				></Button>
+		<>
+			{(isMarathonInUsersList || mode === 'all') && (
+				<StyledCard>
+					<ImageBox>
+						<img src={image} alt={city} />
+						<TextBox>
+							<Link to={`/marathon/${id}`}>
+								<h2>{name}</h2>
+							</Link>
+						</TextBox>
+					</ImageBox>
+					{!isMarathonInUsersList ? (
+						<Button
+							disable={isLoading}
+							text="Add race"
+							color="green"
+							handleClick={addMarathon}
+						></Button>
+					) : (
+						<Button
+							disable={isLoading}
+							text="Delete race"
+							color="red"
+							handleClick={deleteMarathon}
+						></Button>
+					)}
+					<Button text="More info" handleClick={moreInfo}></Button>
+				</StyledCard>
 			)}
-			<Button text="More info" handleClick={moreInfo}></Button>
-		</StyledCard>
+		</>
 	);
 };
 

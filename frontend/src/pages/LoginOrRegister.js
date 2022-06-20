@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
@@ -34,8 +35,17 @@ const LoginOrRegister = () => {
 	const validationError = useSelector((store) => store.user.error);
 
 	useEffect(() => {
-		if (accessToken) {
+		if (accessToken && mode === 'login') {
 			navigate('/userpage');
+		} else if (accessToken && mode === 'register') {
+			swal('User account successfully created!', {
+				buttons: false,
+				timer: 1000,
+			});
+			const timer = setTimeout(() => {
+				navigate('/userpage');
+			}, 2000);
+			return () => clearTimeout(timer);
 		}
 	}, [accessToken]);
 

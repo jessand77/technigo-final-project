@@ -56,6 +56,7 @@ const BucketList = () => {
 							country={marathon.country}
 							url={marathon.website}
 							image={marathon.image}
+							mode="bucket"
 						/>
 					))}
 				</CardContainer>

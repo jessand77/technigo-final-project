@@ -10,18 +10,18 @@ const LogoContainer = styled.div`
 	padding: 1rem;
 	span {
 		font-family: 'Courgette', cursive;
-        font-size: 1.1rem;
+		font-size: 1.4rem;
 	}
-    svg {
-        margin: 3px;
-    }
+	svg {
+		margin: 3px;
+	}
 `;
 
 const Logo = () => {
 	return (
 		<LogoContainer>
 			<RiRunLine />
-			<span>European Marathons</span>
+			<span>Bucket List Marathons</span>
 			<RiRunLine />
 		</LogoContainer>
 	);
