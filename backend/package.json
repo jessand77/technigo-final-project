@@ -23,7 +23,8 @@
 		"mongoose-unique-validator": "^3.1.0",
 		"multer": "^1.4.5-lts.1",
 		"multer-storage-cloudinary": "^4.0.0",
-		"nodemon": "^2.0.16"
+		"nodemon": "^2.0.16",
+		"technigo-final-project": "file:.."
 	},
 	"devDependencies": {
 		"eslint": "^8.16.0",
