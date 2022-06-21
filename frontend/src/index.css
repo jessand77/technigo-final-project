@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Poppins', serif;
-  background-color: ghostwhite;
+  background-color: lightgrey;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,10 +16,23 @@ body {
     monospace;
 } */
 
-.inner-wrapper {
-  width: 100%;
-  height: 100%;
+header {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: aliceblue;
+  border: 1px solid black;
+}
+
+main {
+  width: 80%;
+  height: 100vh;
   margin: 0 auto;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #mapid {

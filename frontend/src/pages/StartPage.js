@@ -1,32 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
-import { RiRunLine } from 'react-icons/ri';
-
-import Header from 'components/Header';
-import Button from 'components/Button';
-import sthlmMarathon from '../assets/sthlm-marathon.jpeg';
-import runners from '../assets/runners.jpg';
-
-const StartPageSection = styled.section`
-	background-image: url(${runners});
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
+import Logo from 'components/Logo';
 
 const TextBox = styled.div`
 	background: white;
 	color: black;
-	font-size: 30px;
-	h1 {
-		margin: 10px 10px 0 10px;
-	}
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -35,28 +14,24 @@ const TextBox = styled.div`
 `;
 
 const StartPage = () => {
-	const hasAccessToken = useSelector((store) => store.user.accessToken);
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		hasAccessToken ? navigate('/userpage') : navigate('/login');
+		navigate('/login');
 	};
-
-	let buttonText;
-	hasAccessToken
-		? (buttonText = 'To user page')
-		: (buttonText = 'Sign up or log in');
 
 	return (
 		<>
-			<Header />
-			<StartPageSection>
+			<header>
+				<Logo />
+			</header>
+			<main>
 				<TextBox>
-					<h1>Welcome runner!</h1>
-					<RiRunLine />
-					<Button handleClick={handleClick} text={buttonText}></Button>
+					<h1>Welcome to Bucket List Marathons!</h1>
+					<p>Here you can read about marathons</p>
+					<button onClick={handleClick}>OK</button>
 				</TextBox>
-			</StartPageSection>
+			</main>
 		</>
 	);
 };
