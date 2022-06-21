@@ -11,11 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
-
 header {
   height: 200px;
   display: flex;
@@ -25,12 +20,22 @@ header {
   border: 1px solid black;
 }
 
+header a {
+  text-decoration: none;
+}
+
+header button {
+  margin: 10px;
+  padding: 5px;
+}
+
 main {
   width: 80%;
   height: 100vh;
   margin: 0 auto;
   background-color: pink;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
