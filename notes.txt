@@ -1,34 +1,9 @@
 Todo
 
-# Fix delete user route in server.js
-
-# Fix function to show info about separate marathon in own component and fetch data from backend
-
 # Make it impossible to add same marathon more than once
 
 
-echo -e "const API_KEY = 'testing remote';" > secret.js
 
 
 
-Innehållet i netlify.toml som jag tog bort tillfälligt
-# This file tells netlify where the code for this project is and
-# how it should build the JavaScript assets to deploy from.
-[build]
-  base = "frontend/"
-  publish = "build/"
-  command = "npm run build"
 
-
-  "browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},

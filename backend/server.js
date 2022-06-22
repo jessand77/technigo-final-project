@@ -5,9 +5,8 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 import listEndpoints from 'express-list-endpoints';
-
-// import marathons from './data/marathons.json';
 
 dotenv.config();
 
@@ -68,6 +67,9 @@ const userSchema = new Schema({
 	],
 });
 
+
+userSchema.plugin(uniqueValidator);
+
 const User = mongoose.model('User', userSchema);
 
 // if (process.env.RESET_DB) {
@@ -89,13 +91,6 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
 	res.send(listEndpoints(app));
 });
-
-// Gets the races from internal json file
-// app.get('/marathonsfromfile', (req, res) => {
-// 	res.status(200).json({
-// 		marathons: marathons,
-// 	});
-// });
 
 // Gets the races from MongoDB
 app.get('/marathons', async (req, res) => {
