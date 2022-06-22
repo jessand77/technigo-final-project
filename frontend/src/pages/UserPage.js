@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+
+import { API_URL } from 'utils/urls';
 
 import Logo from 'components/Logo';
 import MarathonList from 'components/MarathonList';
@@ -9,9 +11,13 @@ import Profile from 'components/Profile';
 import Button from 'components/Button';
 
 import user from '../reducers/user';
+import ui from '../reducers/ui';
 
 const UserPage = () => {
 	const [display, setDisplay] = useState('races');
+
+	const userId = useSelector((store) => store.user.userId);
+	const accessToken = useSelector((store) => store.user.accessToken);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -19,12 +25,43 @@ const UserPage = () => {
 	const handleLogout = () => {
 		confirm('Logout?');
 		dispatch(user.actions.setAccessToken(null));
-		alert('Tack för besöket!');
+		alert('Thanks for today!');
 		navigate('/');
 	};
 
 	const deleteAccount = () => {
 		confirm('Do you want to delete your account?');
+
+		const options = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+		};
+
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}`), options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.success) {
+					navigate('/');
+					batch(() => {
+						dispatch(user.actions.setUserId(null));
+						dispatch(user.actions.setUsername(null));
+						dispatch(user.actions.setAccessToken(null));
+						dispatch(user.actions.setMarathons([]));
+						dispatch(user.actions.setError(null));
+					});
+				} else {
+					console.log(data.response);
+					alert(data.response);
+				}
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
 	return (
