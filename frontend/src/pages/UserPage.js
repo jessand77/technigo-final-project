@@ -6,6 +6,7 @@ import styled from 'styled-components/macro';
 import { API_URL } from 'utils/urls';
 
 import Logo from 'components/Logo';
+import Loader from 'components/Loader';
 import MarathonList from 'components/MarathonList';
 import Profile from 'components/Profile';
 import Button from 'components/Button';
@@ -18,6 +19,7 @@ const UserPage = () => {
 
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
+	const isLoading = useSelector((store) => store.ui.isLoading);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -64,6 +66,8 @@ const UserPage = () => {
 			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
+	isLoading ? <Loader /> : null;
+
 	return (
 		<>
 			<header>
@@ -71,8 +75,20 @@ const UserPage = () => {
 					<Logo />
 				</Link>
 				<nav>
-					<button onClick={() => setDisplay('races')}>All races</button>
-					<button onClick={() => setDisplay('profile')}>Profile</button>
+					<Button
+						active={display === 'races'}
+						text="Race list"
+						color="var(--blue)"
+						textcolor="var(--white)"
+						onClick={() => setDisplay('races')}
+					></Button>
+					<Button
+						active={display === 'profile'}
+						text="Profile"
+						color="var(--blue)"
+						textcolor="var(--white)"
+						onClick={() => setDisplay('profile')}
+					></Button>
 					<Button text="Logout" onClick={handleLogout}></Button>
 				</nav>
 			</header>

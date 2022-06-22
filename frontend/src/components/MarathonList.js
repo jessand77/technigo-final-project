@@ -128,38 +128,3 @@ const MarathonList = ({ displayMode }) => {
 };
 
 export default MarathonList;
-
-// return (
-// 	<>
-// 		{isLoading ? (
-// 			<Loader />
-// 		) : (
-// 			<>
-// 				{/* {displayMode === 'all' && <h2>Add or delete marathons</h2>} */}
-// 				{displayMode === 'bucket' && numberOfMarathons === 0 && (
-// 					<>
-// 						<h3>You don't have any races in your list yet</h3>
-// 						<ImageBox>
-// 							<img src={runners}></img>
-// 						</ImageBox>
-// 					</>
-// 				)}
-// 				{displayMode === 'bucket' && numberOfMarathons > 0 && (
-// 					<h3>You have {numberOfMarathons} races in your list yet</h3>
-// 				)}
-
-// 				<CardContainer>
-// 					{marathonList.map((marathon) => (
-// 						<MarathonCard
-// 							key={marathon._id}
-// 							id={marathon._id}
-// 							name={marathon.name}
-// 							city={marathon.city}
-// 							image={marathon.image}
-// 						/>
-// 					))}
-// 				</CardContainer>
-// 			</>
-// 		)}
-// 	</>
-// );

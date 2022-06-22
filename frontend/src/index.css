@@ -23,22 +23,33 @@
 
 body {
   font-family: 'Poppins', serif;
+  /* font-family: 'Work Sans', sans-serif; */
   background-color: var(--bodybackground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  all: unset;
+  cursor: pointer;
+}
+
 header {
   /*height: 200px;*/
-  flex: 10%;
+  /* flex: 10%; */
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--bodybackground);
+  background-color: var(--blue);
 }
 
 header a {
   text-decoration: none;
+}
+
+header span, svg {
+  color: var(--white);
+  background-color: var(--blue);
 }
 
 header button {

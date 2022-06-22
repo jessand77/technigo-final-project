@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
+import { API_KEY } from 'utils/urls';
 import Loader from 'components/Loader';
 import Button from 'components/Button';
 // import Map from "components/Map";
@@ -16,6 +17,14 @@ const MarathonBox = styled.article`
 	span {
 		font-weight: 700;
 	}
+	a {
+		color: var(--blue);
+		font-weight: bold;
+		margin: 5px 0;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
 `;
 
 const ImageBox = styled.div`
@@ -28,17 +37,35 @@ const MarathonPage = () => {
 	const { id } = useParams();
 	const [marathon, setMarathon] = useState({});
 	const [loading, setLoading] = useState(false);
+	const [temperature, setTemperature] = useState(null);
 
 	useEffect(() => {
 		setLoading(true);
 		fetch(API_URL(`marathons/${id}`))
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.response);
 				setMarathon(data.response);
 				setLoading(false);
 			});
 	}, [id]);
+
+	useEffect(() => {
+		if (marathon.lat) {
+			setLoading(true);
+			fetch(
+				`https://api.openweathermap.org/data/2.5/weather?lat=${marathon.lat}&lon=${marathon.lon}&appid=${API_KEY}`
+			)
+				.then((res) => res.json())
+				.then((data) => {
+					if (data) {
+						console.log(data.main.temp);
+						setTemperature(Math.round(data.main.temp - 273.15));
+					}
+				})
+				.catch((error) => console.error(error))
+				.finally(setLoading(false));
+		}
+	}, [marathon]);
 
 	return (
 		<>
@@ -54,6 +81,7 @@ const MarathonPage = () => {
 						<p>
 							{marathon.city}, <span>{marathon.country}</span>
 						</p>
+						{temperature && <p>Temperature: {temperature} &#8451;</p>}
 						<a href={marathon.website} target="blank">
 							Race webpage
 						</a>

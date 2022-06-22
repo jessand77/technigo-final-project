@@ -16,13 +16,20 @@ const Form = styled.form`
 	background-color: var(boxbackground);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	padding: 20px;
-	min-width: 200px;
+	min-width: 300px;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 	button {
 		margin-bottom: 20px;
 		align-self: flex-start;
+	}
+	input {
+		padding: 5px;
+		border-color: var(--whitesmoke);
+	}
+	.error {
+		color: var(--orange);
 	}
 `;
 
@@ -52,15 +59,6 @@ const Login = () => {
 			return () => clearTimeout(timer);
 		}
 	}, [accessToken]);
-
-	useEffect(() => {
-		if (validationError) {
-			swal(`${validationError}`, {
-				buttons: false,
-				timer: 1000,
-			});
-		}
-	}, []);
 
 	const onFormSubmit = (event) => {
 		event.preventDefault();
@@ -104,10 +102,6 @@ const Login = () => {
 		setMode(mode === 'register' ? 'login' : 'register');
 	};
 
-	// if (isLoading) {
-	// 	return <Loader />;
-	// }
-
 	return (
 		<>
 			<header>
@@ -137,19 +131,19 @@ const Login = () => {
 						type="submit"
 						text={mode === 'register' ? 'Sign up' : 'Login'}
 					></Button>
-
-					{mode === 'register' ? (
-						<p>Already have an account?</p>
-					) : (
-						<p>No account yet?</p>
-					)}
-					<button onClick={toggleMode}>
-						{mode === 'register' ? 'Login' : 'Sign up'}
-					</button>
+					{validationError && <p className="error">{validationError}</p>}
+					<p>
+						{mode === 'register' ? 'Already have an account' : 'No Account yet'}
+						? <br />
+						Click
+						<Button
+							text="here"
+							color="var(--bodybackground)"
+							textcolor="var(--blue)"
+							onClick={toggleMode}
+						></Button>
+					</p>
 				</Form>
-
-				{/* Ta bort? */}
-				<Loader />
 			</main>
 		</>
 	);

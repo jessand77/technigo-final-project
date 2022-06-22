@@ -16,6 +16,9 @@ const StyledCard = styled.article`
 	img {
 		width: 100%;
 	}
+	button {
+		font-size: 0.7em;
+	}
 `;
 
 const ImageBox = styled.div`
@@ -30,8 +33,9 @@ const TextBox = styled.div`
 	background: rgb(0, 0, 0);
 	background: rgba(0, 0, 0, 0.5);
 	color: #f1f1f1;
+	font-size: 0.65em;
 	width: 100%;
-	padding: 20px;
+	padding: 1.5em;
 	a {
 		text-decoration: none;
 		color: white;

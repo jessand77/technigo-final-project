@@ -6,7 +6,11 @@ import Button from 'components/Button';
 
 const TextBox = styled.div`
 	background: --var(boxbackground);
-	color: black;
+	h1,
+	p {
+		color: --var(blackish);
+		margin: 10px;
+	}
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -34,7 +38,7 @@ const StartPage = () => {
 						Bucket List Marathons!
 					</h1>
 					<p>Here you can read about marathons</p>
-					<Button text="Run!" onClick={handleClick}></Button>
+					<Button className="run" text="Run!" onClick={handleClick}></Button>
 				</TextBox>
 			</main>
 		</>

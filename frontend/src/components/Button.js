@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 const StyledButton = styled.button`
-	min-width: 60px;
-	margin-top: 3px;
 	padding: 3px 5px;
 	margin: 5px;
-	background-color: var(--orange);
-	color: var(--white);
+	background-color: ${(props) => props.color || 'var(--orange)'};
+	color: ${(props) => props.textcolor || 'var(--white)'};
+	text-decoration: ${(props) => (props.active ? 'underline' : 'none')};
 	border-color: transparent;
 	border-radius: 5px;
 	align-self: center;
@@ -19,8 +18,17 @@ const StyledButton = styled.button`
 	}
 `;
 
-const Button = ({ text, onClick }) => {
-	return <StyledButton onClick={onClick}>{text}</StyledButton>;
+const Button = ({ active, color, textcolor, onClick, text }) => {
+	return (
+		<StyledButton
+			active={active}
+			color={color}
+			textcolor={textcolor}
+			onClick={onClick}
+		>
+			{text}
+		</StyledButton>
+	);
 };
 
 export default Button;
