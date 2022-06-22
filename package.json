@@ -2,6 +2,9 @@
 	"name": "technigo-final-project",
 	"version": "1.0.0",
 	"description": "My final project at Technigo's bootcamp",
+	"engines": {
+		"node": "16.x"
+	},
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
