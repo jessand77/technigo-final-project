@@ -51,7 +51,7 @@ main {
   /*height: 100vh;*/
   flex: 90%;
   margin: 0 auto;
-  background-color: var(--whitesmoke);
+  background-color: var(--bodybackground);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +69,7 @@ footer p {
 footer button {
   border: none;
   background: none;
-  color: red;
+  color: var(--orange);
   font-size: large;
   font-weight: 600;
   margin: 0 5px;

@@ -50,7 +50,9 @@ const MarathonCard = ({ id, name, image, city }) => {
 				</TextBox>
 			</ImageBox>
 			<Button text="Add/delete"></Button>
-			<Button text="Read more"></Button>
+			<Link to={`/marathon/${id}`}>
+				<Button text="Read more"></Button>
+			</Link>
 		</StyledCard>
 	);
 };

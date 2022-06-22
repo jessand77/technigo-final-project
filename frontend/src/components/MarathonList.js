@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
-
+import { device } from 'utils/breakpoints';
 import { API_URL } from '../utils/urls';
 import Loader from './Loader';
 import MarathonCard from './MarathonCard';
@@ -13,8 +13,18 @@ import user from '../reducers/user';
 const CardContainer = styled.section`
 	width: 95%;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 15px;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	padding: 30px;
+	background-color: var(--white);
+
+	@media (${device.tablet}) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media (${device.laptop}) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
 `;
 
 const ImageBox = styled.div`
@@ -32,7 +42,7 @@ const MarathonList = ({ displayMode }) => {
 	const isLoading = useSelector((store) => store.ui.isLoading);
 	const numberOfMarathons = useSelector((store) => store.user.marathons.length);
 
-	console.log(numberOfMarathons);
+	console.log(device.laptop);
 
 	const dispatch = useDispatch();
 
@@ -72,7 +82,7 @@ const MarathonList = ({ displayMode }) => {
 				<Loader />
 			) : (
 				<>
-					{displayMode === 'all' && <h2>Add or delete marathons</h2>}
+					{/* {displayMode === 'all' && <h2>Add or delete marathons</h2>} */}
 					{displayMode === 'bucket' && numberOfMarathons === 0 && (
 						<>
 							<h3>You don't have any races in your list yet</h3>

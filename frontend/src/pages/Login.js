@@ -7,12 +7,13 @@ import styled from 'styled-components/macro';
 import { API_URL } from 'utils/urls';
 import Loader from 'components/Loader';
 import Logo from 'components/Logo';
+import Button from 'components/Button';
 
 import user from '../reducers/user';
 import ui from '../reducers/ui';
 
 const Form = styled.form`
-	background-color: white;
+	background-color: var(boxbackground);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	min-width: 20%;
@@ -132,9 +133,10 @@ const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
-					<button type="submit">
-						{mode === 'register' ? 'Sign up' : 'Login'}
-					</button>
+					<Button
+						type="submit"
+						text={mode === 'register' ? 'Sign up' : 'Login'}
+					></Button>
 
 					{mode === 'register' ? (
 						<p>Already have an account?</p>
