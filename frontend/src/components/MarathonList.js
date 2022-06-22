@@ -8,10 +8,10 @@ import MarathonCard from './MarathonCard';
 import runners from '../assets/runners.jpg';
 
 import ui from '../reducers/ui';
-import user from '../reducers/user';
 
 const CardContainer = styled.section`
 	width: 95%;
+	margin-top: 20px;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
@@ -80,7 +80,6 @@ const MarathonList = ({ displayMode }) => {
 				<Loader />
 			) : (
 				<>
-					{/* {displayMode === 'all' && <h2>Add or delete marathons</h2>} */}
 					{displayMode === 'bucket' && numberOfMarathons === 0 && (
 						<>
 							<h3>You don't have any races in your list yet</h3>
@@ -107,7 +106,6 @@ const MarathonList = ({ displayMode }) => {
 					)}
 					{displayMode === 'all' && (
 						<>
-							<h3>You have {numberOfMarathons} races in your list</h3>
 							<CardContainer>
 								{marathonList.map((marathon) => (
 									<MarathonCard

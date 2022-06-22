@@ -13,13 +13,13 @@ import user from '../reducers/user';
 import ui from '../reducers/ui';
 
 const Form = styled.form`
-	background-color: var(boxbackground);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	padding: 20px;
 	min-width: 300px;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	background-color: var(boxbackground);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px;
 	button {
 		margin-bottom: 20px;
 		align-self: flex-start;
@@ -101,6 +101,8 @@ const Login = () => {
 	const toggleMode = () => {
 		setMode(mode === 'register' ? 'login' : 'register');
 	};
+
+	isLoading && <Loader />;
 
 	return (
 		<>

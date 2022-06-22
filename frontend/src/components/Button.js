@@ -18,12 +18,13 @@ const StyledButton = styled.button`
 	}
 `;
 
-const Button = ({ active, color, textcolor, onClick, text }) => {
+const Button = ({ active, color, textcolor, onClick, text, disabled }) => {
 	return (
 		<StyledButton
 			active={active}
 			color={color}
 			textcolor={textcolor}
+			disabled={disabled}
 			onClick={onClick}
 		>
 			{text}

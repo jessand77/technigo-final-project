@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
@@ -43,6 +43,85 @@ const TextBox = styled.div`
 `;
 
 const MarathonCard = ({ id, name, image, city }) => {
+	const usersList = useSelector((store) => store.user.marathons);
+	const userId = useSelector((store) => store.user.userId);
+	const accessToken = useSelector((store) => store.user.accessToken);
+	const isLoading = useSelector((store) => store.ui.isLoading);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const isMarathonInUsersList = usersList.some(
+		(marathon) => marathon._id === id
+	);
+
+	const updateMarathonArray = () => {
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}/marathons`))
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.success) {
+					batch(() => {
+						dispatch(user.actions.setMarathons(data.response.marathons));
+						dispatch(user.actions.setError(null));
+					});
+				} else {
+					batch(() => {
+						dispatch(user.actions.setError(data.response));
+					});
+				}
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
+
+	const addMarathon = () => {
+		const marathonToAdd = id;
+
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+			body: JSON.stringify({ marathonToAdd }),
+		};
+
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}/addMarathon`), options)
+			.then((res) => res.json())
+			.then((data) => {
+				updateMarathonArray();
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
+
+	const deleteMarathon = () => {
+		const marathonToDelete = id;
+
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+			body: JSON.stringify({ marathonToDelete }),
+		};
+
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}/deleteMarathon`), options)
+			.then((res) => res.json())
+			.then((data) => {
+				updateMarathonArray();
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
+
 	return (
 		<StyledCard>
 			<ImageBox>
@@ -53,9 +132,18 @@ const MarathonCard = ({ id, name, image, city }) => {
 					</Link>
 				</TextBox>
 			</ImageBox>
-			<Button text="Add/delete"></Button>
+			{!isMarathonInUsersList ? (
+				<Button disabled={isLoading} onClick={addMarathon} text="Add"></Button>
+			) : (
+				<Button
+					disabled={isLoading}
+					onClick={deleteMarathon}
+					text="Delete"
+				></Button>
+			)}
+
 			<Link to={`/marathon/${id}`}>
-				<Button text="Read more"></Button>
+				<Button text="Read more" color="var(--blue)"></Button>
 			</Link>
 		</StyledCard>
 	);

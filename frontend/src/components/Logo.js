@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 import { RiRunLine } from 'react-icons/ri';
 
 const LogoContainer = styled.div`
-	/* @import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap"); */
 	@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,700&display=swap');
 	display: flex;
 	justify-content: center;
