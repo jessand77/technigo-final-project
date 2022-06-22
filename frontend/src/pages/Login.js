@@ -16,7 +16,7 @@ const Form = styled.form`
 	background-color: var(boxbackground);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	padding: 20px;
-	min-width: 20%;
+	min-width: 200px;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
