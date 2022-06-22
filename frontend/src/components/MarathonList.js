@@ -1,61 +1,126 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
-
+import { device } from 'utils/breakpoints';
 import { API_URL } from '../utils/urls';
-import MarathonCard from './MarathonCard';
 import Loader from './Loader';
+import MarathonCard from './MarathonCard';
+import runners from '../assets/runners.jpg';
 
 import ui from '../reducers/ui';
+import user from '../reducers/user';
 
 const CardContainer = styled.section`
+	width: 95%;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	padding: 30px;
+	background-color: var(--white);
+
+	@media ${device.tablet} {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media ${device.laptop} {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 `;
 
-const MarathonList = () => {
-	const [marathons, setMarathons] = useState([]);
+const ImageBox = styled.div`
+	width: 50%;
+	img {
+		width: 100%;
+	}
+`;
 
-	const username = useSelector((store) => store.user.username);
+// displayMode is either "all" or "bucket"
+const MarathonList = ({ displayMode }) => {
+	const [marathonList, setMarathonList] = useState([]);
 
+	const userId = useSelector((store) => store.user.userId);
 	const isLoading = useSelector((store) => store.ui.isLoading);
+	const numberOfMarathons = useSelector((store) => store.user.marathons.length);
+
 	const dispatch = useDispatch();
 
-	const getMarathons = () => {
+	const getAllMarathons = () => {
 		dispatch(ui.actions.setLoading(true));
 
 		fetch(API_URL('marathons'))
 			.then((res) => res.json())
-			.then((data) => setMarathons(data))
+			.then((data) => setMarathonList(data))
 			.catch((error) => console.error(error))
 			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
-	useEffect(() => {
-		getMarathons();
-	}, []);
+	const getBucketMarathons = () => {
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}/marathons`))
+			.then((res) => res.json())
+			.then((data) => setMarathonList(data.response.marathons))
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
+
+	if (displayMode === 'all') {
+		useEffect(() => {
+			getAllMarathons();
+		}, []);
+	} else if (displayMode === 'bucket') {
+		useEffect(() => {
+			getBucketMarathons();
+		}, []);
+	}
 
 	return (
 		<>
-			<Loader />
-			{!isLoading && (
+			{isLoading ? (
+				<Loader />
+			) : (
 				<>
-					<p>{username}, add marathons your bucket list</p>
-					<CardContainer>
-						{marathons.map((marathon) => (
-							<MarathonCard
-								key={marathon._id}
-								id={marathon._id}
-								name={marathon.name}
-								city={marathon.city}
-								country={marathon.country}
-								url={marathon.website}
-								image={marathon.image}
-								mode="all"
-							/>
-						))}
-					</CardContainer>
+					{/* {displayMode === 'all' && <h2>Add or delete marathons</h2>} */}
+					{displayMode === 'bucket' && numberOfMarathons === 0 && (
+						<>
+							<h3>You don't have any races in your list yet</h3>
+							<ImageBox>
+								<img src={runners}></img>
+							</ImageBox>
+						</>
+					)}
+					{displayMode === 'bucket' && numberOfMarathons > 0 && (
+						<>
+							<h3>You have {numberOfMarathons} races in your list</h3>
+							<CardContainer>
+								{marathonList.map((marathon) => (
+									<MarathonCard
+										key={marathon._id}
+										id={marathon._id}
+										name={marathon.name}
+										city={marathon.city}
+										image={marathon.image}
+									/>
+								))}
+							</CardContainer>
+						</>
+					)}
+					{displayMode === 'all' && (
+						<>
+							<h3>You have {numberOfMarathons} races in your list</h3>
+							<CardContainer>
+								{marathonList.map((marathon) => (
+									<MarathonCard
+										key={marathon._id}
+										id={marathon._id}
+										name={marathon.name}
+										city={marathon.city}
+										image={marathon.image}
+									/>
+								))}
+							</CardContainer>
+						</>
+					)}
 				</>
 			)}
 		</>
@@ -63,3 +128,38 @@ const MarathonList = () => {
 };
 
 export default MarathonList;
+
+// return (
+// 	<>
+// 		{isLoading ? (
+// 			<Loader />
+// 		) : (
+// 			<>
+// 				{/* {displayMode === 'all' && <h2>Add or delete marathons</h2>} */}
+// 				{displayMode === 'bucket' && numberOfMarathons === 0 && (
+// 					<>
+// 						<h3>You don't have any races in your list yet</h3>
+// 						<ImageBox>
+// 							<img src={runners}></img>
+// 						</ImageBox>
+// 					</>
+// 				)}
+// 				{displayMode === 'bucket' && numberOfMarathons > 0 && (
+// 					<h3>You have {numberOfMarathons} races in your list yet</h3>
+// 				)}
+
+// 				<CardContainer>
+// 					{marathonList.map((marathon) => (
+// 						<MarathonCard
+// 							key={marathon._id}
+// 							id={marathon._id}
+// 							name={marathon.name}
+// 							city={marathon.city}
+// 							image={marathon.image}
+// 						/>
+// 					))}
+// 				</CardContainer>
+// 			</>
+// 		)}
+// 	</>
+// );

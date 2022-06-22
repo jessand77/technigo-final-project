@@ -1,58 +1,94 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector, batch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import moment from 'moment';
 
-import Header from 'components/Header';
-import UserPageHeader from 'components/UserPageHeader';
+import { API_URL } from 'utils/urls';
+
+import Logo from 'components/Logo';
 import MarathonList from 'components/MarathonList';
-import BucketList from 'components/BucketList';
+import Profile from 'components/Profile';
 import Button from 'components/Button';
 
-const UserPageSection = styled.section`
-	background-color: whitesmoke;
-	padding: 20px;
-	text-align: center;
-	span {
-		color: green;
-	}
-`;
+import user from '../reducers/user';
+import ui from '../reducers/ui';
 
 const UserPage = () => {
-	const [list, setList] = useState('all');
-	const hasAccessToken = useSelector((store) => store.user.accessToken);
-	const username = useSelector((store) => store.user.username);
-	const userSince = useSelector((store) => store.user.userSince);
+	const [display, setDisplay] = useState('races');
 
-	const userMarathons = useSelector((store) => store.user.marathons);
+	const userId = useSelector((store) => store.user.userId);
+	const accessToken = useSelector((store) => store.user.accessToken);
 
-	const toggleList = () => {
-		setList(list === 'all' ? 'bucket' : 'all');
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		confirm('Logout?');
+		dispatch(user.actions.setAccessToken(null));
+		alert('Thanks for today!');
+		navigate('/');
 	};
 
-	if (!hasAccessToken) {
-		return (
-			<>
-				<Header />
-				<h1>You are not logged in</h1>
-			</>
-		);
-	}
+	const deleteAccount = () => {
+		confirm('Do you want to delete your account?');
 
-	let buttonText;
-	list === 'all' ? (buttonText = 'Bucket list') : (buttonText = 'All races');
+		const options = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: accessToken,
+			},
+		};
+
+		dispatch(ui.actions.setLoading(true));
+
+		fetch(API_URL(`users/${userId}`), options)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.success) {
+					navigate('/');
+					batch(() => {
+						dispatch(user.actions.setUserId(null));
+						dispatch(user.actions.setUsername(null));
+						dispatch(user.actions.setAccessToken(null));
+						dispatch(user.actions.setMarathons([]));
+						dispatch(user.actions.setError(null));
+					});
+				} else {
+					console.log(data.response);
+					alert(data.response);
+				}
+			})
+			.catch((error) => console.error(error))
+			.finally(() => dispatch(ui.actions.setLoading(false)));
+	};
 
 	return (
 		<>
-			<UserPageHeader />
-			<UserPageSection>
-				<h1>
-					Hello <span>{username}</span>!
-				</h1>
-				<p>User since {moment(userSince).format('MMMM Do YYYY')}</p>
-				<Button handleClick={toggleList} text={buttonText}></Button>
-				{list === 'all' ? <MarathonList /> : <BucketList />}
-			</UserPageSection>
+			<header>
+				<Link to="/">
+					<Logo />
+				</Link>
+				<nav>
+					<button onClick={() => setDisplay('races')}>All races</button>
+					<button onClick={() => setDisplay('profile')}>Profile</button>
+					<Button text="Logout" onClick={handleLogout}></Button>
+				</nav>
+			</header>
+			<main>
+				<>
+					{display === 'races' && <h2>Add or delete marathons</h2>}
+					{display === 'races' && <MarathonList displayMode="all" />}
+					{display === 'profile' && <Profile />}
+				</>
+			</main>
+			<footer>
+				<p>
+					Click<button onClick={deleteAccount}>here</button>to delete your
+					account
+				</p>
+			</footer>
 		</>
 	);
 };

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
-import Loader from '../components/Loader';
-import Header from 'components/Header';
+import Loader from 'components/Loader';
+import Logo from 'components/Logo';
 import Button from 'components/Button';
 
 import user from '../reducers/user';
 import ui from '../reducers/ui';
 
 const Form = styled.form`
+	background-color: var(boxbackground);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	min-width: 200px;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
@@ -22,7 +26,7 @@ const Form = styled.form`
 	}
 `;
 
-const LoginOrRegister = () => {
+const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [mode, setMode] = useState('register');
@@ -48,6 +52,15 @@ const LoginOrRegister = () => {
 			return () => clearTimeout(timer);
 		}
 	}, [accessToken]);
+
+	useEffect(() => {
+		if (validationError) {
+			swal(`${validationError}`, {
+				buttons: false,
+				timer: 1000,
+			});
+		}
+	}, []);
 
 	const onFormSubmit = (event) => {
 		event.preventDefault();
@@ -91,49 +104,55 @@ const LoginOrRegister = () => {
 		setMode(mode === 'register' ? 'login' : 'register');
 	};
 
-	if (isLoading) {
-		return <Loader />;
-	}
+	// if (isLoading) {
+	// 	return <Loader />;
+	// }
 
 	return (
 		<>
-			<Header />
-			<h1>{mode === 'register' ? 'Sign up' : 'Login'}</h1>
-			<Form onSubmit={onFormSubmit}>
-				<label htmlFor="username">Username</label>
-				<input
-					type="text"
-					id="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					required
-				/>
-				<label htmlFor="password">Password</label>
-				<input
-					type="password"
-					id="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					required
-				/>
-				<Button
-					type="submit"
-					text={mode === 'register' ? 'Sign up' : 'Log in'}
-				></Button>
-			</Form>
-			<Loader />
-			{validationError && <p>{validationError}</p>}
-			{mode === 'register' ? (
-				<p>Already have an account?</p>
-			) : (
-				<p>No account yet?</p>
-			)}
-			<Button
-				text={mode === 'register' ? 'Log in' : 'Sign up'}
-				handleClick={toggleMode}
-			></Button>
+			<header>
+				<Link to="/">
+					<Logo />
+				</Link>
+			</header>
+			<main>
+				<Form onSubmit={onFormSubmit}>
+					<label htmlFor="username">Username</label>
+					<input
+						type="text"
+						id="username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+					<label htmlFor="password">Password</label>
+					<input
+						type="password"
+						id="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+					<Button
+						type="submit"
+						text={mode === 'register' ? 'Sign up' : 'Login'}
+					></Button>
+
+					{mode === 'register' ? (
+						<p>Already have an account?</p>
+					) : (
+						<p>No account yet?</p>
+					)}
+					<button onClick={toggleMode}>
+						{mode === 'register' ? 'Login' : 'Sign up'}
+					</button>
+				</Form>
+
+				{/* Ta bort? */}
+				<Loader />
+			</main>
 		</>
 	);
 };
 
-export default LoginOrRegister;
+export default Login;

@@ -4,48 +4,24 @@ import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
 import Loader from 'components/Loader';
-import Map from 'components/Map';
+import Button from 'components/Button';
+// import Map from "components/Map";
 
-const StyledCard = styled.div`
-	position: relative;
-	text-align: center;
-	/* border: 1px solid black; */
+const MarathonBox = styled.article`
+	display: flex;
+	flex-direction: column;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	// Funkar inte?
-	/* transition: 0.3s;
-	&:hover {
-		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-	} */
-	h2 {
-		font-size: medium;
-	}
-	img {
-		width: 100%;
-	}
-	p {
-		font-size: xx-small;
-	}
-	a {
-		text-decoration: none;
-		color: white;
+	padding: 20px;
+	width: 50%;
+	span {
+		font-weight: 700;
 	}
 `;
 
 const ImageBox = styled.div`
-	position: relative;
-`;
-
-const TextBox = styled.div`
-	position: absolute; /* Position the background text */
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/*bottom: 0; At the bottom. Use top:0 to append it to the top */
-	background: rgb(0, 0, 0); /* Fallback color */
-	background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-	color: #f1f1f1; /* Grey text */
-	width: 100%; /* Full width */
-	padding: 20px; /* Some padding */
+	img {
+		width: 100%;
+	}
 `;
 
 const MarathonPage = () => {
@@ -66,20 +42,27 @@ const MarathonPage = () => {
 
 	return (
 		<>
-			<StyledCard>
-				{loading ? (
-					<Loader />
-				) : (
-					<ImageBox>
-						<img src={marathon.image} alt={id} />
-						<TextBox>
-							<h2>{marathon.name}</h2>
-							<Link to="/userpage">back to userpage</Link>
-						</TextBox>
-					</ImageBox>
-				)}
-			</StyledCard>
-			<Map />
+			{loading ? (
+				<Loader />
+			) : (
+				<main>
+					<MarathonBox>
+						<ImageBox>
+							<img src={marathon.image} />
+						</ImageBox>
+						<h2>{marathon.name}</h2>
+						<p>
+							{marathon.city}, <span>{marathon.country}</span>
+						</p>
+						<a href={marathon.website} target="blank">
+							Race webpage
+						</a>
+						<Link to="/userpage">
+							<Button text="Back"></Button>
+						</Link>
+					</MarathonBox>
+				</main>
+			)}
 		</>
 	);
 };

@@ -1,28 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components/macro';
-
-const NotFoundContainer = styled.div`
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	p {
-		margin: 20px;
-	}
-`;
+import React from "react";
 
 const NotFound = () => {
-	const navigate = useNavigate();
-	const onHomeButtonClick = () => {
-		navigate('/');
-	};
-	return (
-		<NotFoundContainer>
-			<p>This page doesn't exist</p>
-			<button onClick={onHomeButtonClick}>Return to home page</button>
-		</NotFoundContainer>
-	);
+  return <div>NotFound</div>;
 };
 
 export default NotFound;
