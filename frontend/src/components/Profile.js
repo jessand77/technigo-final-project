@@ -7,6 +7,7 @@ import MarathonList from './MarathonList';
 const Userinfo = styled.section`
 	text-align: center;
 	margin-bottom: 30px;
+	color: var(--darktext);
 `;
 
 const Profile = () => {

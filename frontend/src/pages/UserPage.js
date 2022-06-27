@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
 
@@ -91,10 +90,16 @@ const UserPage = () => {
 					<Button text="Logout" onClick={handleLogout}></Button>
 				</nav>
 			</header>
-			<main>
+			<main className="main">
 				<>
-					{display === 'races' && <h2>Add or delete marathons</h2>}
-					{display === 'races' && <MarathonList displayMode="all" />}
+					{display === 'races' && (
+						<>
+							<h1 className="all-races-header">
+								20 European marathons to add to your bucket list
+							</h1>
+							<MarathonList displayMode="all" />
+						</>
+					)}
 					{display === 'profile' && <Profile />}
 				</>
 			</main>

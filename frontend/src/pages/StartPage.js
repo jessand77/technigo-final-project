@@ -31,7 +31,7 @@ const StartPage = () => {
 			<header>
 				<Logo />
 			</header>
-			<main>
+			<main className="main">
 				<TextBox>
 					<h1>
 						Welcome to <br />

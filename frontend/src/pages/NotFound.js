@@ -7,7 +7,7 @@ const NotFound = () => {
 
 	return (
 		<>
-			<main>
+			<main className="main">
 				<h2>Page not found</h2>
 				<Button text="Start page" onClick={() => navigate('/')}></Button>
 			</main>

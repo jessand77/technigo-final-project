@@ -17,7 +17,7 @@ const StyledCard = styled.article`
 		width: 100%;
 	}
 	button {
-		font-size: 0.7em;
+		font-size: 0.8em;
 	}
 `;
 
@@ -60,7 +60,6 @@ const MarathonCard = ({ id, name, image, city, updateList }) => {
 		fetch(API_URL(`users/${userId}/marathons`))
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				if (data.success) {
 					batch(() => {
 						dispatch(user.actions.setMarathons(data.response.marathons));

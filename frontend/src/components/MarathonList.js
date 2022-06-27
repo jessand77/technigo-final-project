@@ -9,21 +9,28 @@ import runners from '../assets/runners.jpg';
 
 import ui from '../reducers/ui';
 
+const BucketTextBox = styled.div`
+	color: var(--orange);
+	text-align: center;
+	margin-bottom: 1rem;
+`;
+
 const CardContainer = styled.section`
 	width: 95%;
-	margin-top: 20px;
+	margin: 20px 0;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
-	padding: 30px;
-	background-color: var(--white);
+	/* padding: 30px; */
+	/* background-color: var(--white); */
 
 	@media ${device.tablet} {
 		grid-template-columns: 1fr 1fr;
 	}
 
 	@media ${device.laptop} {
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: auto auto auto;
+		justify-content: center;
 	}
 `;
 
@@ -89,7 +96,10 @@ const MarathonList = ({ displayMode }) => {
 				<>
 					{displayMode === 'bucket' && numberOfMarathons === 0 && (
 						<>
-							<h3>You don't have any {racetext} in your list yet</h3>
+							<BucketTextBox>
+								<h3>You don't have any {racetext} in your list yet</h3>
+								<p>Go to the race list and add some</p>
+							</BucketTextBox>
 							<ImageBox>
 								<img src={runners}></img>
 							</ImageBox>
@@ -97,9 +107,11 @@ const MarathonList = ({ displayMode }) => {
 					)}
 					{displayMode === 'bucket' && numberOfMarathons > 0 && (
 						<>
-							<h3>
-								You have {numberOfMarathons} {racetext} in your list
-							</h3>
+							<BucketTextBox>
+								<h3>
+									You have {numberOfMarathons} {racetext} in your bucket list
+								</h3>
+							</BucketTextBox>
 							<CardContainer>
 								{marathonList.map((marathon) => (
 									<MarathonCard

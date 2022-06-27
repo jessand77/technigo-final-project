@@ -6,7 +6,8 @@ const StyledButton = styled.button`
 	margin: ${(props) => props.margin || '5px'};
 	background-color: ${(props) => props.color || 'var(--orange)'};
 	color: ${(props) => props.textcolor || 'var(--white)'};
-	text-decoration: ${(props) => (props.active ? 'underline' : 'none')};
+	/* text-decoration: ${(props) => (props.active ? 'underline' : 'none')}; */
+	font-weight: ${(props) => (props.active ? '600' : '400')};
 	border-color: transparent;
 	border-radius: 5px;
 	align-self: center;

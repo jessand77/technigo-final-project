@@ -112,7 +112,7 @@ const Login = () => {
 					<Logo />
 				</Link>
 			</header>
-			<main>
+			<main className="main">
 				<Form onSubmit={onFormSubmit}>
 					<label htmlFor="username">Username</label>
 					<input

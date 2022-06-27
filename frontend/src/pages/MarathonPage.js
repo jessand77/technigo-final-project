@@ -72,7 +72,7 @@ const MarathonPage = () => {
 			{loading ? (
 				<Loader />
 			) : (
-				<main>
+				<main className="main">
 					<MarathonBox>
 						<ImageBox>
 							<img src={marathon.image} />

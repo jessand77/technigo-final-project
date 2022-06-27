@@ -3,6 +3,7 @@
   --whitesmoke: #f5f5f5;
   --white: #ffffff;
   --blackish: #1d1d1d;
+  --darktext: #5a646c;
   --blue: #2fa1bd;
   --bluegreen: #71cbd6;
   --bodybackground: #fafaf7;
@@ -58,7 +59,7 @@ header button {
   padding: 5px;
 }
 
-main {
+.main {
   width: 80%;
   /*height: 100vh;*/
   flex: 90%;
@@ -68,6 +69,12 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.all-races-header {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem 0;
+  color: var(--darktext);
 }
 
 footer {
