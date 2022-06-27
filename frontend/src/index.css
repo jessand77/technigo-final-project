@@ -11,21 +11,22 @@
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#root {
+/* #root {
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
+} */
 
 body {
   font-family: 'Poppins', serif;
   /* font-family: 'Work Sans', sans-serif; */
   background-color: var(--bodybackground);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -35,35 +36,33 @@ a {
   cursor: pointer;
 }
 
-header {
-  height: 100px;
-  /* flex: 10%; */
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.header {
   background-color: var(--blue);
 }
 
-header a {
+.header-content {
+  width: 375px;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid pink;
+}
+
+.header-content a {
   text-decoration: none;
 }
 
-header span,
+.header-content span,
 svg {
   color: var(--white);
   background-color: var(--blue);
 }
 
-header button {
-  margin: 10px;
-  padding: 5px;
-}
-
 .main {
-  width: 80%;
-  /*height: 100vh;*/
-  flex: 90%;
-  margin: 0 auto;
+  width: 375px;
+  margin: 5rem auto;
   background-color: var(--bodybackground);
   display: flex;
   flex-direction: column;
@@ -71,21 +70,16 @@ header button {
   align-items: center;
 }
 
-.all-races-header {
-  font-size: 1.5rem;
-  margin: 2rem 0 1rem 0;
-  color: var(--darktext);
-}
-
-footer {
+.footer {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-footer p {
+.footer p {
   padding: 10px;
 }
 
-footer button {
+.footer button {
   border: none;
   background: none;
   color: var(--orange);
@@ -105,4 +99,20 @@ footer button {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+@media screen and (min-width: 768px) {
+
+  .main,
+  .header-content {
+    width: 768px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .main,
+  .header-content {
+    width: 1024px;
+  }
 }

@@ -14,7 +14,8 @@ const StyledCard = styled.article`
 	text-align: center;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	img {
-		width: 100%;
+		max-width: 100%;
+		height: auto;
 	}
 	button {
 		font-size: 0.8em;
@@ -23,6 +24,7 @@ const StyledCard = styled.article`
 
 const ImageBox = styled.div`
 	position: relative;
+	display: flex;
 `;
 
 const TextBox = styled.div`
@@ -32,7 +34,7 @@ const TextBox = styled.div`
 	transform: translate(-50%, -50%);
 	background: rgb(0, 0, 0);
 	background: rgba(0, 0, 0, 0.5);
-	color: #f1f1f1;
+	//color: #f1f1f1;
 	font-size: 0.65em;
 	width: 100%;
 	padding: 1.5em;
@@ -41,6 +43,9 @@ const TextBox = styled.div`
 		color: white;
 	}
 `;
+
+// Remove Buttonbox or needed for alignment?
+const ButtonBox = styled.div``;
 
 const MarathonCard = ({ id, name, image, city, updateList }) => {
 	const usersList = useSelector((store) => store.user.marathons);
@@ -132,19 +137,31 @@ const MarathonCard = ({ id, name, image, city, updateList }) => {
 					</Link>
 				</TextBox>
 			</ImageBox>
-			{!isMarathonInUsersList ? (
-				<Button disabled={isLoading} onClick={addMarathon} text="Add"></Button>
-			) : (
-				<Button
-					disabled={isLoading}
-					onClick={deleteMarathon}
-					text="Delete"
-				></Button>
-			)}
+			<ButtonBox>
+				{!isMarathonInUsersList ? (
+					<Button
+						disabled={isLoading}
+						onClick={addMarathon}
+						margin="8px 4px"
+						text="Add"
+					></Button>
+				) : (
+					<Button
+						disabled={isLoading}
+						onClick={deleteMarathon}
+						margin="8px 4px"
+						text="Delete"
+					></Button>
+				)}
 
-			<Link to={`/marathon/${id}`}>
-				<Button text="Read more" color="var(--blue)"></Button>
-			</Link>
+				<Link to={`/marathon/${id}`}>
+					<Button
+						text="Read more"
+						margin="8px 4px"
+						color="var(--blue)"
+					></Button>
+				</Link>
+			</ButtonBox>
 		</StyledCard>
 	);
 };

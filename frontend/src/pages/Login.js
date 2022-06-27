@@ -107,11 +107,14 @@ const Login = () => {
 
 	return (
 		<>
-			<header>
-				<Link to="/">
-					<Logo />
-				</Link>
+			<header className="header">
+				<div className="header-content">
+					<Link to="/">
+						<Logo />
+					</Link>
+				</div>
 			</header>
+
 			<main className="main">
 				<Form onSubmit={onFormSubmit}>
 					<label htmlFor="username">Username</label>

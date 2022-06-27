@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
+
 import { device } from 'utils/breakpoints';
 import { API_URL } from '../utils/urls';
 import Loader from './Loader';
@@ -16,7 +17,7 @@ const BucketTextBox = styled.div`
 `;
 
 const CardContainer = styled.section`
-	width: 95%;
+	/* width: 95%; */
 	margin: 20px 0;
 	display: grid;
 	grid-template-columns: 1fr;

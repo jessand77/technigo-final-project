@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
+import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
 import { API_URL } from 'utils/urls';
 
 import Logo from 'components/Logo';
@@ -12,6 +14,43 @@ import Button from 'components/Button';
 
 import user from '../reducers/user';
 import ui from '../reducers/ui';
+
+// DO I NEED THIS?
+const Nav = styled.nav`
+	display: flex;
+	flex-direction: column;
+	button {
+		font-size: 0.8rem;
+	}
+	@media ${device.tablet} {
+		flex-direction: row;
+		button {
+			font-size: 1.2rem;
+		}
+	}
+
+	@media ${device.laptop} {
+		flex-direction: row;
+		button {
+			font-size: 1.5rem;
+		}
+	}
+`;
+
+const AllRaceHeader = styled.h1`
+	width: 70%;
+	font-size: 1.2rem;
+	color: var(--orange);
+	text-align: center;
+
+	@media ${device.tablet} {
+		font-size: 1.2rem;
+	}
+
+	@media ${device.laptop} {
+		font-size: 1.6rem;
+	}
+`;
 
 const UserPage = () => {
 	const [display, setDisplay] = useState('races');
@@ -68,42 +107,51 @@ const UserPage = () => {
 
 	return (
 		<>
-			<header>
-				<Link to="/">
-					<Logo />
-				</Link>
-				<nav>
-					<Button
-						active={display === 'races'}
-						text="Race list"
-						color="var(--blue)"
-						textcolor="var(--white)"
-						onClick={() => setDisplay('races')}
-					></Button>
-					<Button
-						active={display === 'profile'}
-						text="Profile"
-						color="var(--blue)"
-						textcolor="var(--white)"
-						onClick={() => setDisplay('profile')}
-					></Button>
-					<Button text="Logout" onClick={handleLogout}></Button>
-				</nav>
+			<header className="header">
+				<div className="header-content">
+					<Link to="/">
+						<Logo />
+					</Link>
+					<Nav>
+						<Button
+							active={display === 'races'}
+							text="Race list"
+							color="var(--blue)"
+							textcolor="var(--white)"
+							onClick={() => setDisplay('races')}
+						></Button>
+						<Button
+							active={display === 'profile'}
+							text="Profile"
+							color="var(--blue)"
+							textcolor="var(--white)"
+							onClick={() => setDisplay('profile')}
+						></Button>
+						<Button
+							text="Logout"
+							margin="0 0 0 0.6rem"
+							onClick={handleLogout}
+						></Button>
+					</Nav>
+				</div>
 			</header>
+
 			<main className="main">
 				<>
 					{display === 'races' && (
 						<>
-							<h1 className="all-races-header">
+							<AllRaceHeader>
 								20 European marathons to add to your bucket list
-							</h1>
+							</AllRaceHeader>
+
 							<MarathonList displayMode="all" />
 						</>
 					)}
 					{display === 'profile' && <Profile />}
 				</>
 			</main>
-			<footer>
+
+			<footer className="footer">
 				<p>
 					Click<button onClick={deleteAccount}>here</button>to delete your
 					account
