@@ -37,7 +37,7 @@ const StartPage = () => {
 						Welcome to <br />
 						Bucket List Marathons!
 					</h1>
-					<p>Here you can read about marathons</p>
+					<p>Create your own bucket list from a selection of European races</p>
 					<Button className="run" text="Run!" onClick={handleClick}></Button>
 				</TextBox>
 			</main>

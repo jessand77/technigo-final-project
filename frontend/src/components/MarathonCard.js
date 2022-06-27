@@ -77,7 +77,7 @@ const MarathonCard = ({ id, name, image, city }) => {
 	};
 
 	const addMarathon = () => {
-		const marathonToAdd = id;
+		const marathonId = id;
 
 		const options = {
 			method: 'PATCH',
@@ -85,7 +85,7 @@ const MarathonCard = ({ id, name, image, city }) => {
 				'Content-Type': 'application/json',
 				Authorization: accessToken,
 			},
-			body: JSON.stringify({ marathonToAdd }),
+			body: JSON.stringify({ marathonId }),
 		};
 
 		dispatch(ui.actions.setLoading(true));
@@ -100,7 +100,7 @@ const MarathonCard = ({ id, name, image, city }) => {
 	};
 
 	const deleteMarathon = () => {
-		const marathonToDelete = id;
+		const marathonId = id;
 
 		const options = {
 			method: 'PATCH',
@@ -108,7 +108,7 @@ const MarathonCard = ({ id, name, image, city }) => {
 				'Content-Type': 'application/json',
 				Authorization: accessToken,
 			},
-			body: JSON.stringify({ marathonToDelete }),
+			body: JSON.stringify({ marathonId }),
 		};
 
 		dispatch(ui.actions.setLoading(true));

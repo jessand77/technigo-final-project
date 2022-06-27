@@ -67,7 +67,6 @@ const userSchema = new Schema({
 	],
 });
 
-
 userSchema.plugin(uniqueValidator);
 
 const User = mongoose.model('User', userSchema);
@@ -257,21 +256,32 @@ app.get('/users/:userId/marathons', async (req, res) => {
 // --------- Add marathons to a user
 app.patch('/users/:userId/addMarathon', async (req, res) => {
 	const { userId } = req.params;
-	const { marathonToAdd } = req.body;
+	const { marathonId } = req.body;
+
 	try {
-		if (userId) {
+		const marathonToAdd = await Marathon.findById(marathonId);
+		const user = await User.findById(userId);
+
+		const isAlreadyInList = user.marathons.includes(marathonToAdd._id);
+
+		if (userId && !isAlreadyInList) {
 			await User.findByIdAndUpdate(userId, {
 				$push: {
-					marathons: marathonToAdd,
+					marathons: marathonId,
 				},
 			});
 
 			const user = await User.findById(userId);
-			const marathon = await Marathon.findById(marathonToAdd).populate('name');
+			const marathon = await Marathon.findById(marathonId).populate('name');
 
 			res.status(200).json({
 				success: true,
 				response: `${marathon.name} added to user with username ${user.username}`,
+			});
+		} else if (userId && isAlreadyInList) {
+			res.status(400).json({
+				success: false,
+				response: 'The marathon is already in your list',
 			});
 		}
 	} catch (error) {
@@ -285,19 +295,28 @@ app.patch('/users/:userId/addMarathon', async (req, res) => {
 // --------- Delete marathons from a user
 app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	const { userId } = req.params;
-	const { marathonToDelete } = req.body;
+	const { marathonId } = req.body;
+
 	try {
-		if (userId) {
+		const marathonToDelete = await Marathon.findById(marathonId);
+		const user = await User.findById(userId);
+
+		const isInList = user.marathons.includes(marathonToDelete._id);
+		
+		if (userId && !isInList) {
+			res.status(400).json({
+				success: false,
+				response: 'The marathon is not in your list',
+			});
+		} else if (userId && isInList) {
 			await User.findByIdAndUpdate(userId, {
 				$pull: {
-					marathons: marathonToDelete,
+					marathons: marathonId,
 				},
 			});
 
 			const user = await User.findById(userId);
-			const marathon = await Marathon.findById(marathonToDelete).populate(
-				'name'
-			);
+			const marathon = await Marathon.findById(marathonId).populate('name');
 
 			res.status(200).json({
 				success: true,

@@ -16,6 +16,9 @@ const StyledButton = styled.button`
 		background-color: #808080cc;
 		cursor: not-allowed;
 	}
+	&:hover {
+		color: red;
+	}
 `;
 
 const Button = ({ active, color, textcolor, onClick, text, disabled }) => {

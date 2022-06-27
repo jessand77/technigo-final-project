@@ -135,7 +135,7 @@ const Login = () => {
 					></Button>
 					{validationError && <p className="error">{validationError}</p>}
 					<p>
-						{mode === 'register' ? 'Already have an account' : 'No Account yet'}
+						{mode === 'register' ? 'Already have an account' : 'No account yet'}
 						? <br />
 						Click
 						<Button
