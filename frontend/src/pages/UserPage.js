@@ -27,7 +27,6 @@ const UserPage = () => {
 	const handleLogout = () => {
 		confirm('Logout?');
 		dispatch(user.actions.setAccessToken(null));
-		alert('Thanks for today!');
 		navigate('/');
 	};
 

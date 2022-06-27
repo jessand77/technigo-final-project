@@ -18,6 +18,7 @@ const Form = styled.form`
 	flex-direction: column;
 	gap: 5px;
 	background-color: var(boxbackground);
+	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	button {
@@ -143,6 +144,8 @@ const Login = () => {
 							color="var(--bodybackground)"
 							textcolor="var(--blue)"
 							onClick={toggleMode}
+							margin="0 2px"
+							padding="0"
 						></Button>
 					</p>
 				</Form>

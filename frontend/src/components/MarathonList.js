@@ -74,6 +74,13 @@ const MarathonList = ({ displayMode }) => {
 		}, []);
 	}
 
+	let racetext = '';
+	numberOfMarathons === 1 ? (racetext = 'race') : (racetext = 'races');
+
+	// const updateList = () => {
+	// 	getBucketMarathons();
+	// };
+
 	return (
 		<>
 			{isLoading ? (
@@ -82,7 +89,7 @@ const MarathonList = ({ displayMode }) => {
 				<>
 					{displayMode === 'bucket' && numberOfMarathons === 0 && (
 						<>
-							<h3>You don't have any races in your list yet</h3>
+							<h3>You don't have any {racetext} in your list yet</h3>
 							<ImageBox>
 								<img src={runners}></img>
 							</ImageBox>
@@ -90,7 +97,9 @@ const MarathonList = ({ displayMode }) => {
 					)}
 					{displayMode === 'bucket' && numberOfMarathons > 0 && (
 						<>
-							<h3>You have {numberOfMarathons} races in your list</h3>
+							<h3>
+								You have {numberOfMarathons} {racetext} in your list
+							</h3>
 							<CardContainer>
 								{marathonList.map((marathon) => (
 									<MarathonCard
@@ -99,6 +108,7 @@ const MarathonList = ({ displayMode }) => {
 										name={marathon.name}
 										city={marathon.city}
 										image={marathon.image}
+										updateList={getBucketMarathons}
 									/>
 								))}
 							</CardContainer>

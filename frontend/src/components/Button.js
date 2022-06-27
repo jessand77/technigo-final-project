@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 const StyledButton = styled.button`
-	padding: 3px 5px;
-	margin: 5px;
+	padding: ${(props) => props.padding || '3px 5px'};
+	margin: ${(props) => props.margin || '5px'};
 	background-color: ${(props) => props.color || 'var(--orange)'};
 	color: ${(props) => props.textcolor || 'var(--white)'};
 	text-decoration: ${(props) => (props.active ? 'underline' : 'none')};
@@ -17,11 +17,20 @@ const StyledButton = styled.button`
 		cursor: not-allowed;
 	}
 	&:hover {
-		color: red;
+		opacity: 0.8;
 	}
 `;
 
-const Button = ({ active, color, textcolor, onClick, text, disabled }) => {
+const Button = ({
+	active,
+	color,
+	textcolor,
+	disabled,
+	onClick,
+	margin,
+	padding,
+	text,
+}) => {
 	return (
 		<StyledButton
 			active={active}
@@ -29,6 +38,8 @@ const Button = ({ active, color, textcolor, onClick, text, disabled }) => {
 			textcolor={textcolor}
 			disabled={disabled}
 			onClick={onClick}
+			margin={margin}
+			padding={padding}
 		>
 			{text}
 		</StyledButton>

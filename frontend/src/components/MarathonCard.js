@@ -42,7 +42,7 @@ const TextBox = styled.div`
 	}
 `;
 
-const MarathonCard = ({ id, name, image, city }) => {
+const MarathonCard = ({ id, name, image, city, updateList }) => {
 	const usersList = useSelector((store) => store.user.marathons);
 	const userId = useSelector((store) => store.user.userId);
 	const accessToken = useSelector((store) => store.user.accessToken);
@@ -66,6 +66,7 @@ const MarathonCard = ({ id, name, image, city }) => {
 						dispatch(user.actions.setMarathons(data.response.marathons));
 						dispatch(user.actions.setError(null));
 					});
+					updateList();
 				} else {
 					batch(() => {
 						dispatch(user.actions.setError(data.response));
