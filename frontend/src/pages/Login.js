@@ -8,6 +8,7 @@ import { API_URL } from 'utils/urls';
 import Loader from 'components/Loader';
 import Logo from 'components/Logo';
 import Button from 'components/Button';
+import LinkStyleButton from 'components/LinkStyleButton';
 
 import user from '../reducers/user';
 import ui from '../reducers/ui';
@@ -141,15 +142,11 @@ const Login = () => {
 					<p>
 						{mode === 'register' ? 'Already have an account' : 'No account yet'}
 						? <br />
-						Click
-						<Button
-							text="here"
-							color="var(--bodybackground)"
-							textcolor="var(--blue)"
+						Click&nbsp;
+						<LinkStyleButton
 							onClick={toggleMode}
-							margin="0 2px"
-							padding="0"
-						></Button>
+							text="here."
+						></LinkStyleButton>
 					</p>
 				</Form>
 			</main>

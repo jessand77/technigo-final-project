@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { device } from 'utils/breakpoints';
 
 const StyledButton = styled.button`
 	padding: ${(props) => props.padding || '3px 5px'};
@@ -10,7 +11,7 @@ const StyledButton = styled.button`
 	border-color: transparent;
 	border-radius: 5px;
 	align-self: center;
-	/* font-size: 1rem; */
+	font-size: 1rem;
 	cursor: pointer;
 	&:disabled {
 		background-color: #808080cc;
@@ -18,6 +19,12 @@ const StyledButton = styled.button`
 	}
 	&:hover {
 		opacity: 0.8;
+	}
+	@media ${device.tablet} {
+		font-size: 1.2rem;
+	}
+	@media ${device.laptop} {
+		font-size: 1.6rem;
 	}
 `;
 
