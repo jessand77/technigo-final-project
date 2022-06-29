@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"private": true,
 	"dependencies": {
-		"@chakra-ui/react": "^2.2.1",
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
 		"@reduxjs/toolkit": "^1.8.2",
@@ -16,7 +15,6 @@
 		"eslint-plugin-react": "^7.16.0",
 		"eslint-plugin-react-hooks": "^2.3.0",
 		"framer-motion": "^6.3.11",
-		"leaflet": "^1.8.0",
 		"lottie-react": "^2.3.0",
 		"mapbox-gl": "^2.9.0",
 		"moment": "^2.29.3",
