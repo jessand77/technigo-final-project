@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import { API_URL } from 'utils/urls';
@@ -54,7 +54,6 @@ const MarathonCard = ({ id, name, image, city, updateList }) => {
 	const accessToken = useSelector((store) => store.user.accessToken);
 	const isLoading = useSelector((store) => store.ui.isLoading);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const isMarathonInUsersList = usersList.some(
 		(marathon) => marathon._id === id
@@ -71,7 +70,7 @@ const MarathonCard = ({ id, name, image, city, updateList }) => {
 						dispatch(user.actions.setMarathons(data.response.marathons));
 						dispatch(user.actions.setError(null));
 					});
-					updateList();
+					updateList(); //This is causing errors in the console - try to find solution
 				} else {
 					batch(() => {
 						dispatch(user.actions.setError(data.response));
@@ -79,7 +78,9 @@ const MarathonCard = ({ id, name, image, city, updateList }) => {
 				}
 			})
 			.catch((error) => console.error(error))
-			.finally(() => dispatch(ui.actions.setLoading(false)));
+			.finally(() => {
+				dispatch(ui.actions.setLoading(false));
+			});
 	};
 
 	const addMarathon = () => {

@@ -11,6 +11,7 @@ import Logo from 'components/Logo';
 import MarathonList from 'components/MarathonList';
 import Profile from 'components/Profile';
 import Button from 'components/Button';
+import LinkStyleButton from 'components/LinkStyleButton';
 
 import user from '../reducers/user';
 import ui from '../reducers/ui';
@@ -76,7 +77,7 @@ const UserPage = () => {
 	const confirmDelete = () => {
 		swal({
 			title: 'Are you sure?',
-			text: 'If you press ok your accunt will be deleted',
+			text: 'If you press ok your account will be deleted',
 			icon: 'warning',
 			buttons: true,
 			dangerMode: true,
@@ -174,8 +175,13 @@ const UserPage = () => {
 					Your account was created on {moment(userSince).format('MMMM Do YYYY')}
 					.
 					<br />
-					Click<button onClick={confirmDelete}>here</button>to delete your
-					account.
+					Click&nbsp;
+					<LinkStyleButton
+						onClick={confirmDelete}
+						textcolor="var(--orange)"
+						text="here"
+					></LinkStyleButton>
+					&nbsp;to delete your account.
 				</p>
 			</footer>
 		</>

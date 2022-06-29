@@ -7,7 +7,7 @@ const StyledButton = styled.button`
 	font-size: 100%;
 	font-weight: 600;
 	background: none;
-	color: var(--blue);
+	color: ${(props) => props.textcolor || 'var(--blue)'};
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -17,8 +17,12 @@ const StyledButton = styled.button`
 	-webkit-appearance: button;
 `;
 
-const LinkStyleButton = ({ text, onClick }) => {
-	return <StyledButton onClick={onClick}>{text}</StyledButton>;
+const LinkStyleButton = ({ text, onClick, textcolor }) => {
+	return (
+		<StyledButton onClick={onClick} textcolor={textcolor}>
+			{text}
+		</StyledButton>
+	);
 };
 
 export default LinkStyleButton;

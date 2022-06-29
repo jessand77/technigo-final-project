@@ -7,7 +7,6 @@ import { API_KEY } from 'utils/urls';
 import { device } from 'utils/breakpoints';
 import Loader from 'components/Loader';
 import Button from 'components/Button';
-// import Map from "components/Map";
 
 const MarathonBox = styled.article`
 	display: flex;
@@ -101,7 +100,7 @@ const MarathonPage = () => {
 							{' '}
 							{temperature && weather && (
 								<span>
-									Current weather: {temperature} &#8451; and {weather}
+									Current weather: {temperature}&#8451; and {weather}
 								</span>
 							)}
 						</p>

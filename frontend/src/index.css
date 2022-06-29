@@ -72,15 +72,6 @@ svg {
   padding: 10px;
 }
 
-.footer button {
-  border: none;
-  background: none;
-  color: var(--orange);
-  font-size: large;
-  font-weight: 600;
-  margin: 0 5px;
-}
-
 @media screen and (min-width: 768px) {
 
   .main,

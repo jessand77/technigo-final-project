@@ -50,18 +50,24 @@ const Login = () => {
 	const accessToken = useSelector((store) => store.user.accessToken);
 	const validationError = useSelector((store) => store.user.error);
 
+	// useEffect(() => {
+	// 	if (accessToken && mode === 'login') {
+	// 		navigate('/userpage');
+	// 	} else if (accessToken && mode === 'register') {
+	// 		swal('User account successfully created!', {
+	// 			buttons: false,
+	// 			timer: 1000,
+	// 		});
+	// 		const timer = setTimeout(() => {
+	// 			navigate('/userpage');
+	// 		}, 2000);
+	// 		return () => clearTimeout(timer);
+	// 	}
+	// }, [accessToken]);
+
 	useEffect(() => {
-		if (accessToken && mode === 'login') {
+		if (accessToken) {
 			navigate('/userpage');
-		} else if (accessToken && mode === 'register') {
-			swal('User account successfully created!', {
-				buttons: false,
-				timer: 1000,
-			});
-			const timer = setTimeout(() => {
-				navigate('/userpage');
-			}, 2000);
-			return () => clearTimeout(timer);
 		}
 	}, [accessToken]);
 
