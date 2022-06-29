@@ -4,13 +4,12 @@ import { RiRunLine } from 'react-icons/ri';
 import { device } from 'utils/breakpoints';
 
 const LogoContainer = styled.div`
-	@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,700&display=swap');
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	span {
-		/* font-family: 'Merriweather Sans', cursive; */
-		font-family: 'Mali', cursive;
+		font-family: Poppins, serif;
+		font-weight: bolder;
 		margin: 0 5px;
 	}
 	span,
