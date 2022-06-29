@@ -14,7 +14,7 @@ const LogoContainer = styled.div`
 	}
 	span,
 	svg {
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 	}
 
 	@media ${device.tablet} {

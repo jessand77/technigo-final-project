@@ -1,6 +1,4 @@
-Todo
 
-# Make it impossible to add same marathon more than once
 
 
 

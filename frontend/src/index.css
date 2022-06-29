@@ -1,5 +1,6 @@
 :root {
   --orange: #e78a1b;
+  /* --orange: #ff8100; Is this one better?*/
   --whitesmoke: #f5f5f5;
   --white: #ffffff;
   --blackish: #1d1d1d;
@@ -36,7 +37,7 @@ a {
 .header-content {
   width: 375px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 1.2rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,7 +70,7 @@ svg {
 }
 
 .footer p {
-  padding: 10px;
+  padding: 0.4rem;
 }
 
 @media screen and (min-width: 768px) {

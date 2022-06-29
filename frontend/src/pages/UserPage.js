@@ -9,7 +9,6 @@ import { API_URL } from 'utils/urls';
 
 import Logo from 'components/Logo';
 import MarathonList from 'components/MarathonList';
-import Profile from 'components/Profile';
 import Button from 'components/Button';
 import LinkStyleButton from 'components/LinkStyleButton';
 
@@ -18,7 +17,7 @@ import ui from '../reducers/ui';
 
 const UserPageHeaderContent = styled.div`
 	flex-direction: column;
-	gap: 1rem;
+	gap: 0.5rem;
 `;
 
 const Nav = styled.nav`
@@ -56,10 +55,17 @@ const AllRaceHeader = styled.h1`
 	}
 `;
 
+const Userinfo = styled.section`
+	text-align: center;
+	margin-bottom: 1rem;
+	color: var(--darktext);
+`;
+
 const UserPage = () => {
 	const [display, setDisplay] = useState('races');
 
 	const userId = useSelector((store) => store.user.userId);
+	const username = useSelector((store) => store.user.username);
 	const userSince = useSelector((store) => store.user.userSince);
 	const accessToken = useSelector((store) => store.user.accessToken);
 
@@ -166,7 +172,14 @@ const UserPage = () => {
 							<MarathonList displayMode="all" />
 						</>
 					)}
-					{display === 'profile' && <Profile />}
+					{display === 'profile' && (
+						<>
+							<Userinfo>
+								<h1>Hello {username}!</h1>
+							</Userinfo>
+							<MarathonList displayMode="bucket" />
+						</>
+					)}
 				</>
 			</main>
 

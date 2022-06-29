@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { device } from 'utils/breakpoints';
 import Logo from 'components/Logo';
@@ -15,12 +16,12 @@ const TextBox = styled.div`
 	padding: 2rem;
 `;
 
-const StartHeader = styled.h1`
-	font-size: 1.3rem;
+const StartHeading = styled.h1`
+	font-size: 1.4rem;
 	color: var(--orange);
 
 	@media ${device.tablet} {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 	}
 
 	@media ${device.laptop} {
@@ -29,7 +30,7 @@ const StartHeader = styled.h1`
 `;
 
 const StartText = styled.p`
-	font-size: 0.8rem;
+	font-size: 1rem;
 	color: var(--darktext);
 	padding: 1rem 0;
 
@@ -43,10 +44,15 @@ const StartText = styled.p`
 `;
 
 const StartPage = () => {
+	const accessToken = useSelector((store) => store.user.accessToken);
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		navigate('/login');
+		if (accessToken) {
+			navigate('/userpage');
+		} else {
+			navigate('/login');
+		}
 	};
 
 	return (
@@ -59,14 +65,14 @@ const StartPage = () => {
 
 			<main className="main">
 				<TextBox>
-					<StartHeader>
+					<StartHeading>
 						Welcome to <br />
 						Bucket List Marathons!
-					</StartHeader>
+					</StartHeading>
 					<StartText>
 						Create your own bucket list from a selection of European races
 					</StartText>
-					<Button className="run" text="Run!" onClick={handleClick}></Button>
+					<Button className="run" text="OK!" onClick={handleClick}></Button>
 				</TextBox>
 			</main>
 		</>
