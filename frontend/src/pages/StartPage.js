@@ -58,7 +58,7 @@ const StartPage = () => {
 	return (
 		<>
 			<header className="header">
-				<div className="header-content">
+				<div className="header-content center">
 					<Logo />
 				</div>
 			</header>

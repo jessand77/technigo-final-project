@@ -9,12 +9,13 @@ const LogoContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	span {
-		font-family: 'Merriweather Sans', cursive;
+		/* font-family: 'Merriweather Sans', cursive; */
+		font-family: 'Mali', cursive;
 		margin: 0 5px;
 	}
 	span,
 	svg {
-		font-size: 0.9rem;
+		font-size: 1.2rem;
 	}
 
 	@media ${device.tablet} {

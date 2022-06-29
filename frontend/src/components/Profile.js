@@ -1,12 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
-import moment from 'moment';
 import MarathonList from './MarathonList';
 
 const Userinfo = styled.section`
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 1rem;
 	color: var(--darktext);
 `;
 
@@ -20,10 +19,6 @@ const Profile = () => {
 				<h1>
 					Hello <span>{username}</span>!
 				</h1>
-				<p>
-					Your account was created on {moment(userSince).format('MMMM Do YYYY')}
-					.
-				</p>
 			</Userinfo>
 			<MarathonList displayMode="bucket" />
 		</>

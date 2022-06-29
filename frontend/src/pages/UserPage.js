@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import moment from 'moment';
 
 import { device } from 'utils/breakpoints';
 import { API_URL } from 'utils/urls';
@@ -15,24 +16,28 @@ import Button from 'components/Button';
 import user from '../reducers/user';
 import ui from '../reducers/ui';
 
+const UserPageHeaderContent = styled.div`
+	flex-direction: column;
+	gap: 1rem;
+`;
+
 // DO I NEED THIS?
 const Nav = styled.nav`
 	display: flex;
-	flex-direction: column;
 	button {
 		font-size: 0.8rem;
 	}
 	@media ${device.tablet} {
 		flex-direction: row;
 		button {
-			font-size: 1.2rem;
+			font-size: 1rem;
 		}
 	}
 
 	@media ${device.laptop} {
 		flex-direction: row;
 		button {
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 		}
 	}
 `;
@@ -56,6 +61,7 @@ const UserPage = () => {
 	const [display, setDisplay] = useState('races');
 
 	const userId = useSelector((store) => store.user.userId);
+	const userSince = useSelector((store) => store.user.userSince);
 	const accessToken = useSelector((store) => store.user.accessToken);
 	const isLoading = useSelector((store) => store.ui.isLoading);
 
@@ -103,12 +109,10 @@ const UserPage = () => {
 			.finally(() => dispatch(ui.actions.setLoading(false)));
 	};
 
-	isLoading ? <Loader /> : null;
-
 	return (
 		<>
 			<header className="header">
-				<div className="header-content">
+				<UserPageHeaderContent className="header-content">
 					<Link to="/">
 						<Logo />
 					</Link>
@@ -127,13 +131,9 @@ const UserPage = () => {
 							textcolor="var(--white)"
 							onClick={() => setDisplay('profile')}
 						></Button>
-						<Button
-							text="Logout"
-							margin="0 0 0 0.6rem"
-							onClick={handleLogout}
-						></Button>
+						<Button text="Logout" padding="1px 3px" onClick={handleLogout}></Button>
 					</Nav>
-				</div>
+				</UserPageHeaderContent>
 			</header>
 
 			<main className="main">
@@ -153,8 +153,11 @@ const UserPage = () => {
 
 			<footer className="footer">
 				<p>
+					Your account was created on {moment(userSince).format('MMMM Do YYYY')}
+					.
+					<br />
 					Click<button onClick={deleteAccount}>here</button>to delete your
-					account
+					account.
 				</p>
 			</footer>
 		</>

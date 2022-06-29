@@ -146,10 +146,15 @@ app.post('/register', async (req, res) => {
 			marathons: newUser.marathons,
 		});
 	} catch (error) {
-		if (error.code === 11000) {
-			res.status(409).json({
+		if (error.errors.username.kind === 'unique') {
+			res.status(400).json({
 				success: false,
 				message: 'The username already exists',
+			});
+		} else if (error.errors.username.kind === 'minlength') {
+			res.status(400).json({
+				success: false,
+				message: 'The username is too short',
 			});
 		} else {
 			res.status(400).json({
@@ -225,7 +230,7 @@ app.get('/users', async (req, res) => {
 	}
 });
 
-// --------- Get all marathons of a specific user
+// --------- Get all marathons of a specific user ------------
 app.get('/users/:userId/marathons', async (req, res) => {
 	const { userId } = req.params;
 	try {
@@ -253,7 +258,7 @@ app.get('/users/:userId/marathons', async (req, res) => {
 	}
 });
 
-// --------- Add marathons to a user
+// --------- Add marathons to a user -----------
 app.patch('/users/:userId/addMarathon', async (req, res) => {
 	const { userId } = req.params;
 	const { marathonId } = req.body;
@@ -292,7 +297,7 @@ app.patch('/users/:userId/addMarathon', async (req, res) => {
 	}
 });
 
-// --------- Delete marathons from a user
+// --------- Delete marathons from a user ---------
 app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	const { userId } = req.params;
 	const { marathonId } = req.body;
@@ -302,7 +307,7 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 		const user = await User.findById(userId);
 
 		const isInList = user.marathons.includes(marathonToDelete._id);
-		
+
 		if (userId && !isInList) {
 			res.status(400).json({
 				success: false,
@@ -331,7 +336,7 @@ app.patch('/users/:userId/deleteMarathon', async (req, res) => {
 	}
 });
 
-// ----------- Delete user account
+// ----------- Delete user account ------------
 app.delete('/users/:userId', authenticateUser);
 app.delete('/users/:userId', async (req, res) => {
 	const { userId } = req.params;

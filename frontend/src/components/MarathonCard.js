@@ -28,16 +28,16 @@ const ImageBox = styled.div`
 `;
 
 const TextBox = styled.div`
+	width: 100%;
+	font-size: 0.65em;
+	letter-spacing: 1px;
+	padding: 1.5em;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: rgb(0, 0, 0);
 	background: rgba(0, 0, 0, 0.5);
-	//color: #f1f1f1;
-	font-size: 0.65em;
-	width: 100%;
-	padding: 1.5em;
 	a {
 		text-decoration: none;
 		color: white;
@@ -45,7 +45,9 @@ const TextBox = styled.div`
 `;
 
 // Remove Buttonbox or needed for alignment?
-const ButtonBox = styled.div``;
+const ButtonBox = styled.div`
+	margin: 5px;
+`;
 
 const MarathonCard = ({ id, name, image, city, updateList }) => {
 	const usersList = useSelector((store) => store.user.marathons);

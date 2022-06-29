@@ -15,13 +15,15 @@ import ui from '../reducers/ui';
 
 const Form = styled.form`
 	min-width: 300px;
+	padding: 20px;
+	margin: 40px 0;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 	background-color: var(boxbackground);
 	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	padding: 20px;
+	
 	button {
 		margin-bottom: 20px;
 		align-self: flex-start;
@@ -107,7 +109,7 @@ const Login = () => {
 	return (
 		<>
 			<header className="header">
-				<div className="header-content login">
+				<div className="header-content center">
 					<Link to="/">
 						<Logo />
 					</Link>
@@ -137,6 +139,7 @@ const Login = () => {
 						/>
 						<Button
 							type="submit"
+							margin="5px 0"
 							text={mode === 'register' ? 'Sign up' : 'Login'}
 						></Button>
 						{validationError && <p className="error">{validationError}</p>}
