@@ -13,12 +13,6 @@ const TextBox = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 2rem;
-
-	@media ${device.tablet} {
-	}
-
-	@media ${device.laptop} {
-	}
 `;
 
 const StartHeader = styled.h1`

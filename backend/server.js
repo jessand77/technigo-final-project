@@ -156,6 +156,11 @@ app.post('/register', async (req, res) => {
 				success: false,
 				message: 'The username is too short',
 			});
+		} else if (error.errors.username.kind === 'maxlength') {
+			res.status(400).json({
+				success: false,
+				message: 'The username is too long',
+			});
 		} else {
 			res.status(400).json({
 				success: false,

@@ -7,7 +7,7 @@ const StyledButton = styled.button`
 	margin: ${(props) => props.margin || '5px'};
 	background-color: ${(props) => props.color || 'var(--orange)'};
 	color: ${(props) => props.textcolor || 'var(--white)'};
-	font-weight: ${(props) => (props.active ? '700' : '400')};
+	font-weight: ${(props) => (props.active ? '800' : '400')};
 	font-size: 1rem;
 	font-family: inherit;
 	border-color: transparent;
@@ -21,12 +21,6 @@ const StyledButton = styled.button`
 	&:hover {
 		opacity: 0.8;
 	}
-	/* @media ${device.tablet} {
-		font-size: 1.2rem;
-	}
-	@media ${device.laptop} {
-		font-size: 1.6rem;
-	} */
 `;
 
 const Button = ({

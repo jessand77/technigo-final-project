@@ -44,7 +44,6 @@ const TextBox = styled.div`
 	}
 `;
 
-// Remove Buttonbox or needed for alignment?
 const ButtonBox = styled.div`
 	margin: 5px;
 `;

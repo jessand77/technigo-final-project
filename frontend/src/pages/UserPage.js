@@ -8,7 +8,6 @@ import { device } from 'utils/breakpoints';
 import { API_URL } from 'utils/urls';
 
 import Logo from 'components/Logo';
-import Loader from 'components/Loader';
 import MarathonList from 'components/MarathonList';
 import Profile from 'components/Profile';
 import Button from 'components/Button';
@@ -21,7 +20,6 @@ const UserPageHeaderContent = styled.div`
 	gap: 1rem;
 `;
 
-// DO I NEED THIS?
 const Nav = styled.nav`
 	display: flex;
 	button {
@@ -63,20 +61,38 @@ const UserPage = () => {
 	const userId = useSelector((store) => store.user.userId);
 	const userSince = useSelector((store) => store.user.userSince);
 	const accessToken = useSelector((store) => store.user.accessToken);
-	const isLoading = useSelector((store) => store.ui.isLoading);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		confirm('Logout?');
-		dispatch(user.actions.setAccessToken(null));
-		navigate('/');
+		let logout = confirm('Logout?');
+		if (logout) {
+			dispatch(user.actions.setAccessToken(null));
+			navigate('/');
+		}
+	};
+
+	const confirmDelete = () => {
+		swal({
+			title: 'Are you sure?',
+			text: 'If you press ok your accunt will be deleted',
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				swal('Your account was successfully deleted', {
+					icon: 'success',
+				});
+				deleteAccount();
+			} else {
+				swal('Your account has not been deleted');
+			}
+		});
 	};
 
 	const deleteAccount = () => {
-		confirm('Do you want to delete your account?');
-
 		const options = {
 			method: 'DELETE',
 			headers: {
@@ -90,7 +106,6 @@ const UserPage = () => {
 		fetch(API_URL(`users/${userId}`), options)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				if (data.success) {
 					navigate('/');
 					batch(() => {
@@ -101,7 +116,6 @@ const UserPage = () => {
 						dispatch(user.actions.setError(null));
 					});
 				} else {
-					console.log(data.response);
 					alert(data.response);
 				}
 			})
@@ -131,7 +145,11 @@ const UserPage = () => {
 							textcolor="var(--white)"
 							onClick={() => setDisplay('profile')}
 						></Button>
-						<Button text="Logout" padding="1px 3px" onClick={handleLogout}></Button>
+						<Button
+							text="Logout"
+							padding="1px 3px"
+							onClick={handleLogout}
+						></Button>
 					</Nav>
 				</UserPageHeaderContent>
 			</header>
@@ -156,7 +174,7 @@ const UserPage = () => {
 					Your account was created on {moment(userSince).format('MMMM Do YYYY')}
 					.
 					<br />
-					Click<button onClick={deleteAccount}>here</button>to delete your
+					Click<button onClick={confirmDelete}>here</button>to delete your
 					account.
 				</p>
 			</footer>

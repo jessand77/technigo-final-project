@@ -23,7 +23,7 @@ const Form = styled.form`
 	background-color: var(boxbackground);
 	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	
+
 	button {
 		margin-bottom: 20px;
 		align-self: flex-start;
@@ -64,6 +64,9 @@ const Login = () => {
 			return () => clearTimeout(timer);
 		}
 	}, [accessToken]);
+
+	const disableSubmitButton =
+		username.length < 3 || username.length > 20 || password.length < 3;
 
 	const onFormSubmit = (event) => {
 		event.preventDefault();
@@ -125,6 +128,7 @@ const Login = () => {
 						<input
 							type="text"
 							id="username"
+							placeholder="3 to 20 characters"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							required
@@ -133,12 +137,14 @@ const Login = () => {
 						<input
 							type="password"
 							id="password"
+							placeholder="Min. 3 characters"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							required
 						/>
 						<Button
 							type="submit"
+							disabled={disableSubmitButton}
 							margin="5px 0"
 							text={mode === 'register' ? 'Sign up' : 'Login'}
 						></Button>

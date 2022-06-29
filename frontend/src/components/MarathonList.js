@@ -17,13 +17,10 @@ const BucketTextBox = styled.div`
 `;
 
 const CardContainer = styled.section`
-	/* width: 95%; */
 	margin: 20px 0;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
-	/* padding: 30px; */
-	/* background-color: var(--white); */
 
 	@media ${device.tablet} {
 		grid-template-columns: 1fr 1fr;
