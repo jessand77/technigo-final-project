@@ -50,7 +50,11 @@ a {
   border: 1px solid pink;
 }
 
-.header-content a {
+.header-content.login {
+  justify-content: center;
+}
+
+.header-content {
   text-decoration: none;
 }
 

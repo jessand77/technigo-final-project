@@ -28,6 +28,7 @@ const Form = styled.form`
 	}
 	input {
 		padding: 5px;
+		margin-bottom: 0.8rem;
 		border-color: var(--whitesmoke);
 	}
 	.error {
@@ -75,7 +76,6 @@ const Login = () => {
 		fetch(API_URL(mode), options)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				if (data.success) {
 					batch(() => {
 						dispatch(user.actions.setUserId(data.userId));
@@ -104,52 +104,56 @@ const Login = () => {
 		setMode(mode === 'register' ? 'login' : 'register');
 	};
 
-	isLoading && <Loader />;
-
 	return (
 		<>
 			<header className="header">
-				<div className="header-content">
+				<div className="header-content login">
 					<Link to="/">
 						<Logo />
 					</Link>
 				</div>
 			</header>
 
-			<main className="main">
-				<Form onSubmit={onFormSubmit}>
-					<label htmlFor="username">Username</label>
-					<input
-						type="text"
-						id="username"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-					<label htmlFor="password">Password</label>
-					<input
-						type="password"
-						id="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-					<Button
-						type="submit"
-						text={mode === 'register' ? 'Sign up' : 'Login'}
-					></Button>
-					{validationError && <p className="error">{validationError}</p>}
-					<p>
-						{mode === 'register' ? 'Already have an account' : 'No account yet'}
-						? <br />
-						Click&nbsp;
-						<LinkStyleButton
-							onClick={toggleMode}
-							text="here."
-						></LinkStyleButton>
-					</p>
-				</Form>
-			</main>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<main className="main">
+					<Form onSubmit={onFormSubmit}>
+						<label htmlFor="username">Username</label>
+						<input
+							type="text"
+							id="username"
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+							required
+						/>
+						<label htmlFor="password">Password</label>
+						<input
+							type="password"
+							id="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
+						<Button
+							type="submit"
+							text={mode === 'register' ? 'Sign up' : 'Login'}
+						></Button>
+						{validationError && <p className="error">{validationError}</p>}
+						<p>
+							{mode === 'register'
+								? 'Already have an account'
+								: 'No account yet'}
+							? <br />
+							Click&nbsp;
+							<LinkStyleButton
+								onClick={toggleMode}
+								text="here."
+							></LinkStyleButton>
+						</p>
+					</Form>
+				</main>
+			)}
 		</>
 	);
 };
