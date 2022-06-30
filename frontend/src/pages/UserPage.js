@@ -3,6 +3,7 @@ import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import moment from 'moment';
+import swal from 'sweetalert';
 
 import { device } from 'utils/breakpoints';
 import { API_URL } from 'utils/urls';
