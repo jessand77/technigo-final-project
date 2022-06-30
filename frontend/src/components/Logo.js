@@ -10,6 +10,8 @@ const LogoContainer = styled.div`
 	span {
 		font-family: Poppins, serif;
 		font-weight: bolder;
+		font-style: italic;
+		text-transform: uppercase;
 		margin: 0 5px;
 	}
 	span,

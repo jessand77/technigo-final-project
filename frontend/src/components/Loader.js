@@ -16,7 +16,13 @@ const Loader = () => {
 	return (
 		<LoaderDiv>
 			{isLoading && (
-				<Oval color="#00BFFF" height={80} width={80} ariaLabel="loading" />
+				<Oval
+					color="var(--orange)"
+					secondaryColor="var(--white)"
+					height={80}
+					width={80}
+					ariaLabel="loading-indicator"
+				/>
 			)}
 		</LoaderDiv>
 	);
