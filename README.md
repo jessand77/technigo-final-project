@@ -12,6 +12,6 @@ The project's backend part was built using Node.js, Express, MongoDB and Mongoos
 
 ## View it live
 
-Backend: https://technigo-final-project.herokuapp.com/
+Backend: https://technigo-backends.onrender.com/final-project-api/
 
 Frontend: https://technigo-final-project.netlify.app/
